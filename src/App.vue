@@ -14,19 +14,27 @@ import HelloWorld from './components/HelloWorld.vue'
       </nav>
     </div>
   </header>
-
-  <RouterView />
+  <div class = "content">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
+.content {
+  align-items: center;
+  width: 90%;
+  margin: auto;
+
+}
+
+
 .location {
-  color: #888;
+  color: #acdeae;
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;

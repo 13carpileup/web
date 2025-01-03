@@ -3,11 +3,12 @@ import file from '../components/file.vue'
 </script>
 
 <template>
-  <div class="about">
-    <file fileName="fortnite.md">
-      <h1>Fork</h1>
+  <main>
+    <file fileName="fortnite.md" date="2024/12">
+      <h1>hi! I'm alex, a high school student.</h1>
+      <p>I love</p>
     </file>
-  </div>
+  </main>
 </template>
 
 <style>
