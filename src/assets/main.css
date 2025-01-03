@@ -7,17 +7,14 @@
   padding: 0 20px;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: var(--vt-c-terminal-green);
-  transition: all 0.3s ease;
-}
-
 @media (hover: hover) {
+  a {
+    transition: all 0.3s ease; /* Smooth transition for the effect */
+  }
+
   a:hover {
-    background-color: rgba(0, 255, 0, 0.1);
-    text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.6), 
+                 0 0 20px rgba(0, 255, 0, 0.4), 
+                 0 0 40px rgba(0, 255, 0, 0.3);
   }
 }
-
