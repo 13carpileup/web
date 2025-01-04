@@ -69,8 +69,7 @@ import file from '../components/file.vue'
 }
 
 .project-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.4rem;
   color: #ffffff;
   margin: 0;
 }
