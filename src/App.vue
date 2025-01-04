@@ -1,11 +1,39 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { ref, watch } from 'vue';
+import { useRoute, RouterLink, RouterView } from 'vue-router';
+
+const route = useRoute();
+
+const typedLocation = ref('');
+
+function typeText(target: string, speed = 65) {
+  typedLocation.value = ''; 
+  let i = 0;
+
+  const typeInterval = setInterval(() => {
+    if (i < target.length) {
+      typedLocation.value += target[i];
+      i++;
+    } else {
+      clearInterval(typeInterval); 
+    }
+  }, speed);
+}
+
+watch(() => route.name, (newRouteName) => {
+  const newLocation = `${String(newRouteName)}`;
+  if (newLocation != "undefined" && newLocation != "null") {
+    typeText(newLocation);
+  }
+  
+});
+
 </script>
 
 <template>
   <header>    
     <div class="wrapper">
-      <h2 class = "location">~/alex_climie/{{ $route.name }}</h2>
+      <h2 class = "location">~/alex_climie/{{ typedLocation }}</h2>
       <nav>
         <p class = "joke">[alex@web]$ cd </p>
         <RouterLink to="/">../home</RouterLink>
