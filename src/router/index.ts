@@ -14,6 +14,16 @@ const router = createRouter({
       name: 'projects',
       component: () => import('../views/ProjectsView.vue'),
     },
+    {
+      path: '/blog',
+      name: 'blog',
+      component: () => import('../views/BlogView.vue'),
+    },
+    {
+      path: '/blog/hkcert.md',
+      name: 'hkcertblog',
+      component: () => import('../blogs/hkcert.vue'),
+    },
   ],
 })
 

@@ -6,12 +6,12 @@ const route = useRoute();
 
 const typedLocation = ref('');
 
-function typeText(target: string, speed = 65) {
+function typeText(target: string, time: number, speed = 65) {
   typedLocation.value = ''; 
   let i = 0;
 
   const typeInterval = setInterval(() => {
-    if (i < target.length) {
+    if (i < target.length && time == lastUpdate) {
       typedLocation.value += target[i];
       i++;
     } else {
@@ -20,10 +20,15 @@ function typeText(target: string, speed = 65) {
   }, speed);
 }
 
+let lastUpdate = 0;
+
 watch(() => route.name, (newRouteName) => {
+  lastUpdate = Date.now();
   const newLocation = `${String(newRouteName)}`;
+
   if (newLocation != "undefined" && newLocation != "null") {
-    typeText(newLocation);
+    // you see.. by recalling Date.now(), we avoid a race condition.... very important stuff ....
+    typeText(newLocation, Date.now());
   }
   
 });
@@ -36,12 +41,12 @@ watch(() => route.name, (newRouteName) => {
       <h2 class = "location">~/alex_climie/{{ typedLocation }}</h2>
       <nav>
         <p class = "joke">[alex@web]$ cd </p>
-        <RouterLink to="/"><span class = "phone-hide">../</span>home</RouterLink>
-        <RouterLink to="/projects"><span class = "phone-hide">../</span>projects</RouterLink>
-        <a target = "_blank" href = "https://13carpileup.github.io/"><span class = "phone-hide">../</span>blog</a>
+        <RouterLink class="link" to="/"><span class = "phone-hide">../</span>home</RouterLink>
+        <RouterLink class="link" to="/projects"><span class = "phone-hide">../</span>projects</RouterLink>
+        <RouterLink class="link" to="/blog"><span class = "phone-hide">../</span>blog</RouterLink>
       </nav>
     </div>
-  </header>
+</header>
   <div class = "content">
     <RouterView />
   </div>
