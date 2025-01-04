@@ -58,7 +58,7 @@ watch(() => route.name, (newRouteName) => {
   padding: 2rem;
   margin: auto;
   background-color: #1a1a1a;
-  background-image: radial-gradient(#2a2a2a 1px, transparent 1px);
+  background-image: radial-gradient(#434343 1px, transparent 2px);
   background-size: 32px 32px;
   border-radius: 10px;
 
