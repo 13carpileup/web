@@ -45,6 +45,17 @@ import file from '../components/file.vue'
           <p class="project-tech">tech: rust</p>
         </div>
       </file>
+      <file fileName="mun.md" date="2024/6">
+        <div class="project-content">
+          <h2 class="project-title">kgvmun</h2>
+          <p class="project-description">my first and last 'serious' attempt at frontend dev</p>
+          <p class="project-link">
+            Access: 
+            <a target="_blank" href="http://kgvmun.org/">kgvmun.org</a>
+          </p>
+          <p class="project-tech">tech: vue</p>
+        </div>
+      </file>
     </div>
   </main>
 </template>
@@ -78,7 +89,7 @@ import file from '../components/file.vue'
   font-size: 1rem;
   color: #d4d4d4;
   margin: 0;
-}
+}g
 
 .project-link a {
   font-size: 1rem;
