@@ -29,12 +29,19 @@ import file from '../components/file.vue'
 .all {
   padding-left: 8rem;
   padding-right: 8rem;
+
+}
+
+.content:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 
 .content {
   margin: auto;
-  margin-top: 1.2rem;
-  margin-bottom: 1.2rem;
+}
+
+.content:not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 
 .intro {
