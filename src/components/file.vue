@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   fileName: string,
-  date: string
+  date?: string
 }>()
 </script>
 
@@ -9,7 +9,7 @@ defineProps<{
   <div class="file-container">
     <div class="file-header">
 
-      <p class="file-meta">{{ fileName }} - {{ date }}</p>
+      <p class="file-meta">{{ fileName }} <span v-if="date">- {{ date }}</span></p>
     </div>
     <div class="file-content">
       <slot></slot>

@@ -7,9 +7,10 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="wrapper">
       <h2 class = "location">~/alex_climie/{{ $route.name }}</h2>
       <nav>
-        <RouterLink to="/">/home</RouterLink>
-        <RouterLink to="/projects">/projects</RouterLink>
-        <a target = "_blank" href = "https://13carpileup.github.io/">/blog</a>
+        <p class = "joke">[alex@web]$ cd </p>
+        <RouterLink to="/">../home</RouterLink>
+        <RouterLink to="/projects">../projects</RouterLink>
+        <a target = "_blank" href = "https://13carpileup.github.io/">../blog</a>
       </nav>
     </div>
   </header>
@@ -19,6 +20,10 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
+.joke {
+  color: rgb(89, 103, 85);
+}
+
 .content {
   align-items: center;
   width: 100%;
@@ -33,7 +38,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 
 .location {
-  color: #acdeae;
+  color: #b2ffb5;
   font-size: 1.1rem;
 }
 
