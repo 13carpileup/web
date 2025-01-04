@@ -36,9 +36,9 @@ watch(() => route.name, (newRouteName) => {
       <h2 class = "location">~/alex_climie/{{ typedLocation }}</h2>
       <nav>
         <p class = "joke">[alex@web]$ cd </p>
-        <RouterLink to="/">../home</RouterLink>
-        <RouterLink to="/projects">../projects</RouterLink>
-        <a target = "_blank" href = "https://13carpileup.github.io/">../blog</a>
+        <RouterLink to="/"><span class = "phone-hide">../</span>home</RouterLink>
+        <RouterLink to="/projects"><span class = "phone-hide">../</span>projects</RouterLink>
+        <a target = "_blank" href = "https://13carpileup.github.io/"><span class = "phone-hide">../</span>blog</a>
       </nav>
     </div>
   </header>
@@ -61,7 +61,6 @@ watch(() => route.name, (newRouteName) => {
   background-image: radial-gradient(#434343 1px, transparent 2px);
   background-size: 32px 32px;
   border-radius: 10px;
-
 }
 
 
@@ -116,7 +115,21 @@ nav a.router-link-exact-active {
   
   nav {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
   }
+
+  .location {
+    display: none;
+  }
+
+  .joke {
+    display: none;
+  }
+
+  .phone-hide {
+    display: none;
+  }
+
+
 }
 </style>

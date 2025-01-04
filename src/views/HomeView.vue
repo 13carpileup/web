@@ -3,7 +3,7 @@ import file from '../components/file.vue'
 </script>
 
 <template>
-  <main>
+  <main class = "all">
     <file fileName="me.md" class = "content" id = "me">
       <h1 class = "intro">hi! I'm alex, a high school student.</h1>
       <p>i am an ib victim (i.e. i spend all of my time complaining and none of it studying)</p>
@@ -26,9 +26,15 @@ import file from '../components/file.vue'
 
 <style scoped>
 
+.all {
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
 .content {
-  max-width: 85%;
-  margin: auto auto 20px;
+  margin: auto;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .intro {
@@ -55,5 +61,12 @@ import file from '../components/file.vue'
   font-family: 'JetBrains Mono', monospace;
   border: 1px solid rgba(130, 87, 229, 0.2);
   transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .all {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
 }
 </style>

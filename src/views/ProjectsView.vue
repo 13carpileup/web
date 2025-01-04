@@ -114,10 +114,7 @@ import file from '../components/file.vue'
 }
 
 @media (max-width: 768px) {
-  .projects-container {
-    padding: 1rem;
-  }
-  
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
