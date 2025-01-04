@@ -15,6 +15,7 @@ import file from '../components/file.vue'
         <span class = "tech-item">c++</span>
         <span class = "tech-item">js</span>
         <span class = "tech-item">py</span>
+        <span class = "tech-item">i use arch btw</span>
       </div>
     </file>
     <file fileName="socials.md" class = "content" id = "socials">
