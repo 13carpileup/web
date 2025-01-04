@@ -7,7 +7,10 @@ defineProps<{
 
 <template>
   <div class="file-container">
-    <p class="file-meta">{{ fileName }} - {{ date }}</p>
+    <div class="file-header">
+
+      <p class="file-meta">{{ fileName }} - {{ date }}</p>
+    </div>
     <div class="file-content">
       <slot></slot>
     </div>
@@ -16,67 +19,124 @@ defineProps<{
 
 <style scoped>
 .file-container {
-  padding: 1rem;
-  border: 1px solid var(--vt-c-terminal-gray);
-  border-radius: 8px;
-
+  background: #222222;
+  border: 1px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
-.file-content:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.file-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2),
+              0 0 0 1px rgba(255, 255, 255, 0.1),
+              0 0 32px rgba(130, 87, 229, 0.1);
+}
+
+.file-header {
+  background: #2a2a2a;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.window-controls span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+}
+
+.window-controls span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.window-controls span:nth-child(3) {
+  background: #27c93f;
 }
 
 .file-meta {
   font-family: 'Fira Code', monospace;
   font-size: 0.9rem;
-  font-style: italic;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--vt-c-terminal-gray);
+  color: #888;
+  margin: 0;
+  flex-grow: 1;
 }
 
 .file-content {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
   line-height: 1.6;
-  color: var(--vt-c-text-dark-1);
-  padding: 1rem;
-  font-size: 13px;
-  background-color: rgb(34, 34, 34);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 1.25rem;
+  font-size: 0.9rem;
+  background-color: #222222;
+  position: relative;
 }
 
-.file-content h1 {
-  font-weight: 600;
-  font-size: 2rem;
-  color: var(--vt-c-terminal-green);
-  margin: 1rem 0;
-}
-
-.file-content h3 {
-  font-size: 1.2rem;
-  color: var(--vt-c-text-dark-2);
-  margin-bottom: 0.75rem;
+.file-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    rgba(130, 87, 229, 0.2),
+    rgba(214, 51, 132, 0.2)
+  );
 }
 
 .file-content p {
-  font-size: 1rem;
-  margin: 0.5rem 0;
-  color: var(--vt-c-text-dark-1);
+  margin: 0.75rem 0;
+  color: #d4d4d4;
+}
+
+.file-content a {
+  color: #8257e5;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(130, 87, 229, 0.4);
+  transition: all 0.2s ease;
+  padding-bottom: 1px;
+}
+
+.file-content a:hover {
+  color: #9b79f7;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(130, 87, 229, 0.8);
 }
 
 @media (max-width: 768px) {
   .file-container {
-    padding: 0.75rem;
+    margin-bottom: 1rem;
   }
 
-  .file-content h1 {
-    font-size: 1.8rem;
+  .file-header {
+    padding: 0.5rem 0.75rem;
   }
 
-  .file-content p {
-    font-size: 0.95rem;
+  .file-content {
+    padding: 1rem;
   }
 }
+
+@keyframes typing {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.file-content p {
+  animation: typing 0.3s ease-out forwards;
+  animation-delay: calc(var(--index, 0) * 0.1s);
+}
+
+.file-content p:nth-child(1) { --index: 1; }
+.file-content p:nth-child(2) { --index: 2; }
+.file-content p:nth-child(3) { --index: 3; }
 </style>

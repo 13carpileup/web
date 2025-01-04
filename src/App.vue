@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -10,7 +9,7 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">/home</RouterLink>
         <RouterLink to="/projects">/projects</RouterLink>
-        <RouterLink to="/blog">/blog</RouterLink>
+        <a target = "_blank" href = "https://13carpileup.github.io/">/blog</a>
       </nav>
     </div>
   </header>
@@ -22,8 +21,13 @@ import HelloWorld from './components/HelloWorld.vue'
 <style scoped>
 .content {
   align-items: center;
-  width: 90%;
+  width: 100%;
+  padding: 2rem;
   margin: auto;
+  background-color: #1a1a1a;
+  background-image: radial-gradient(#2a2a2a 1px, transparent 1px);
+  background-size: 32px 32px;
+  border-radius: 10px;
 
 }
 
