@@ -1,22 +1,37 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import VueMarkdown from "vue-markdown-render"; 
+import { ref, onMounted, nextTick } from "vue";
+import VueMarkdown from "vue-markdown-render";
+import Prism from "prismjs";
+import "prismjs/themes/prism-tomorrow.css";
+import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-liquid'
+import 'prismjs/components/prism-markdown'
+import 'prismjs/components/prism-markup-templating'
+import 'prismjs/components/prism-php'
+import 'prismjs/components/prism-scss'
+import 'prismjs/components/prism-python'
+
 
 let props = defineProps<{
-  src: string; 
+  src: string;
 }>();
 
 let url = "../posts/" + props.src;
 console.log(url);
 
-const markdownContent = ref<string>(""); 
+const markdownContent = ref<string>("");
 
 onMounted(async () => {
   try {
-    const response = await fetch(url); 
+    const response = await fetch(url);
     console.log(response);
     if (response.ok) {
-      markdownContent.value = await response.text(); 
+      markdownContent.value = await response.text();
+      nextTick(() => {
+        Prism.highlightAll();
+      });
     } else {
       console.error(`Failed to load markdown file at ${url}`);
     }
@@ -27,16 +42,15 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class = "vue-markdown-render">
+  <div class="vue-markdown-render">
     <VueMarkdown :source="markdownContent" />
   </div>
 </template>
 
-
 <style>
 .vue-markdown-render {
   line-height: 1.6;
-  color:rgb(208, 208, 208);
+  color: rgb(208, 208, 208);
 }
 
 .vue-markdown-render h1,
@@ -54,14 +68,13 @@ onMounted(async () => {
 }
 
 .vue-markdown-render pre {
-  background-color: #343434;
   border-radius: 10px;
   padding: 1rem;
   overflow-x: auto;
 }
 
 .vue-markdown-render code {
-  font-family: 'Source Code Pro', monospace;
+  font-family: "Source Code Pro", monospace;
 }
 
 .vue-markdown-render img {

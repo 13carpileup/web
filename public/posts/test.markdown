@@ -29,7 +29,7 @@ While this may be acceptable for one block of data, when you have hundreds of bl
 If we can try to employ the same technique on the encrypted data provided, we might be able to make some progress. We will break the encrypted data back into its cipher blocks, then try to decipher some kind of pattern.
 
 ```python
-blocks = [ct[i:i+16] for i in range(0, len(ct), 16)] // turns back into array of blocks of 16
+blocks = [ct[i:i+16] for i in range(0, len(ct), 16)] # turns back into array of blocks of 16
 ```
 \
 We don't know what the file dimensions are. For now, we will assume that it is approximately a square. There are 196612 blocks, so let's give the image a size of 444. We will now assign each cipher with its own unique colour, and see what the output is. Maybe there'll be a flag!
