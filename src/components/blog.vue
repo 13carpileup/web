@@ -6,13 +6,15 @@ let props = defineProps<{
   src: string; 
 }>();
 
-let url = "../../../../src/assets/posts/" + props.src;
+let url = "../../../../../../src/assets/posts/" + props.src;
+console.log(url);
 
 const markdownContent = ref<string>(""); 
 
 onMounted(async () => {
   try {
     const response = await fetch(url); 
+    console.log(response);
     if (response.ok) {
       markdownContent.value = await response.text(); 
     } else {
