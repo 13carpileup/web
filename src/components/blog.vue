@@ -27,15 +27,44 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class = "vue-markdown-render">
     <VueMarkdown :source="markdownContent" />
   </div>
 </template>
 
 
 <style>
-code {
-    width: 100%;
-    height:100%;
+.vue-markdown-render {
+  line-height: 1.6;
+  color:rgb(208, 208, 208);
+}
+
+.vue-markdown-render h1,
+.vue-markdown-render h2,
+.vue-markdown-render h3,
+.vue-markdown-render h4,
+.vue-markdown-render h5,
+.vue-markdown-render h6 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.vue-markdown-render p {
+  margin-bottom: 1rem;
+}
+
+.vue-markdown-render pre {
+  background-color: #343434;
+  border-radius: 10px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.vue-markdown-render code {
+  font-family: 'Source Code Pro', monospace;
+}
+
+.vue-markdown-render img {
+  max-width: 100%;
 }
 </style>
