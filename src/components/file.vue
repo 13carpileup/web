@@ -16,7 +16,7 @@ defineProps<{
         <span v-if="date">- {{ date }}</span> 
         <span v-if="gh" class="github-link">
           <a target="_blank" :href="gh" class="github-anchor">
-            <img class="github-image" src="../../../../gh.png" alt="GitHub"/>
+            <img class="github-image" src="/gh.png" alt="GitHub"/>
           </a>
         </span>
       </p>
