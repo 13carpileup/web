@@ -6,7 +6,7 @@ let props = defineProps<{
   src: string; 
 }>();
 
-let url = "../../../../../../src/assets/posts/" + props.src;
+let url = "../public/posts/" + props.src;
 console.log(url);
 
 const markdownContent = ref<string>(""); 
