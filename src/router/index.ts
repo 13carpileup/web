@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'blog/hkcert.md',
       component: () => import('../blogs/hkcert.vue'),
     },
+    { 
+      path: "/:pathMatch(.*)*",
+      name: "ERROR_LOST_404",
+      component: () => import('../views/404View.vue'), 
+    }
   ],
 })
 
