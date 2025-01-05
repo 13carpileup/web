@@ -4,6 +4,7 @@ defineProps<{
   fileName: string,
   date?: string,
   gh?: string,
+  back?: string
 }>()
 
 </script>
@@ -19,15 +20,41 @@ defineProps<{
             <img class="github-image" src="/gh.png" alt="GitHub"/>
           </a>
         </span>
+        <span v-if="back" class="github-link">
+          <RouterLink :to="back" class="github-anchor">
+            <img class="github-image" src="/back.png" alt="Back"/>
+          </RouterLink>
+        </span>
       </p>
     </div>
     <div class="file-content">
       <slot></slot>
     </div>
+    <div v-if="back" class="file-header">
+      <p class="file-meta">
+        <RouterLink :to="back" class="github-anchor">
+        <span class="github-link" id="bottom-link">
+            <img class="github-image" src="/back.png" alt="Back"/>
+        </span>
+        <span class="footer-text">return to blogs</span>
+        </RouterLink>
+      </p>
+    </div>
   </div>
 </template>
 
 <style scoped>
+
+.footer-text {
+  font-style: italic;
+  margin-left: 2rem;
+  color:rgb(128, 128, 128);
+}
+
+a {
+  text-decoration: none;
+}
+
 .github-image {
   width: 18px; 
   height: 18px;
@@ -53,6 +80,10 @@ defineProps<{
 
 .github-anchor:hover .github-image {
   opacity: 1;
+}
+
+#bottom-link {
+  float:left;
 }
 
 .file-container {
