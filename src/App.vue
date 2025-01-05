@@ -6,13 +6,14 @@ const route = useRoute();
 
 const typedLocation = ref('');
 
-function typeText(target: string, time: number, speed = 65) {
-  typedLocation.value = ''; 
+function typeText(target: string, time: number, prefix = '', speed = 65) {
+  typedLocation.value = prefix; 
+  const n = prefix.length;
   let i = 0;
 
   const typeInterval = setInterval(() => {
-    if (i < target.length && time == lastUpdate) {
-      typedLocation.value += target[i];
+    if (i < (target.length - n) && time == lastUpdate) {
+      typedLocation.value += target[i + n];
       i++;
     } else {
       clearInterval(typeInterval); 
@@ -20,15 +21,42 @@ function typeText(target: string, time: number, speed = 65) {
   }, speed);
 }
 
-let lastUpdate = 0;
+function deleteText(n: number, time: number, speed = 65) {
+  return new Promise<void>((resolve) => {
+    let i = 0;
 
-watch(() => route.name, (newRouteName) => {
+    const typeInterval = setInterval(() => {
+      if (i < n && time === lastUpdate) {
+        typedLocation.value = typedLocation.value.slice(0, -1);
+        i++;
+      } else {
+        clearInterval(typeInterval);
+        resolve();
+      }
+    }, speed);
+  });
+}
+
+let lastUpdate = 0;
+let lastRoute = ''
+
+watch(() => route.name, async (newRouteName) => {
   lastUpdate = Date.now();
-  const newLocation = `${String(newRouteName)}`;
+  let newLocation = `${String(newRouteName)}`;
 
   if (newLocation != "undefined" && newLocation != "null") {
     // you see.. by recalling Date.now(), we avoid a race condition.... very important stuff ....
-    typeText(newLocation, Date.now());
+    if (newLocation.startsWith(lastRoute)) {
+      typeText(newLocation, Date.now(), lastRoute);
+    }
+    else if (lastRoute.startsWith(newLocation)) {
+      deleteText(lastRoute.length - newLocation.length, Date.now());
+    }
+    else {
+      await deleteText(lastRoute.length, lastUpdate, 45);
+      typeText(newLocation, lastUpdate);
+    }
+    lastRoute = newLocation;
   }
   
 });

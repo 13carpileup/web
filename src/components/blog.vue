@@ -6,7 +6,7 @@ let props = defineProps<{
   src: string; 
 }>();
 
-let url = "../src/assets/posts/" + props.src;
+let url = "../../../../src/assets/posts/" + props.src;
 
 const markdownContent = ref<string>(""); 
 
@@ -15,7 +15,6 @@ onMounted(async () => {
     const response = await fetch(url); 
     if (response.ok) {
       markdownContent.value = await response.text(); 
-      console.log(markdownContent.value)
     } else {
       console.error(`Failed to load markdown file at ${url}`);
     }

@@ -21,7 +21,7 @@ const router = createRouter({
     },
     {
       path: '/blog/hkcert.md',
-      name: 'hkcertblog',
+      name: 'blog/hkcert.md',
       component: () => import('../blogs/hkcert.vue'),
     },
   ],
