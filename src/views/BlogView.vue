@@ -8,7 +8,7 @@ import blog from '../components/blog.vue'
   <main class="projects-container">
     <div class="projects-grid">
     <RouterLink to="/blog/hkcert.md">
-      <file fileName="hkcert.md" date="2024/10">
+      <file fileName="hkcert.md" date="2024/11/17">
         <div class="project-content">
           <h2 class="project-title">HKCERT CTF</h2>
           <p class="project-description">a writeup of the electronic cookbook cryptography challenge @ hkcert 2024 qualifiers. click to read!</p>

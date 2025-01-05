@@ -5,7 +5,7 @@ import file from '../components/file.vue'
 <template>
   <main class="projects-container">
     <div class="projects-grid">
-      <file fileName="topdownuniverse.md" date="2024/12">
+      <file fileName="topdownuniverse.md" date="2024/12" gh="https://github.com/13carpileup/topdownuniverse">
         <div class="project-content">
           <h2 class="project-title">Top-Down Universe</h2>
           <p class="project-description">Imagine the universe, but we removed a dimension.</p>
@@ -16,7 +16,7 @@ import file from '../components/file.vue'
           <p class="project-tech">tech: js, pixijs</p>
         </div>
       </file>
-      <file fileName="nomissmayhem.md" date="2024/11">
+      <file fileName="nomissmayhem.md" date="2024/11" gh="https://github.com/13carpileup/nomissmayhem">
         <div class="project-content">
           <h2 class="project-title">No Miss Mayhem</h2>
           <p class="project-description">counterspell hong kong! top 10 global finalist! etc</p>
@@ -27,7 +27,7 @@ import file from '../components/file.vue'
           <p class="project-tech">tech: js (canvas api :skull:), rust (backend)</p>
         </div>
       </file>
-      <file fileName="wiki.md" date="2024/12">
+      <file fileName="wiki.md" date="2024/12" gh="https://github.com/13carpileup/wikiscraper">
         <div class="project-content">
           <h2 class="project-title">WikiScraper</h2>
           <p class="project-description">a partially functioning wikipedia scraper</p>
@@ -38,14 +38,14 @@ import file from '../components/file.vue'
           <p class="project-tech">tech: expressjs, postgres, py</p>
         </div>
       </file>
-      <file fileName="lionel3.md" date="2024/6">
+      <file fileName="lionel3.md" date="2024/6" gh="https://github.com/13carpileup/lionel3">
         <div class="project-content">
           <h2 class="project-title">Lionel 3</h2>
           <p class="project-description">i don't like my school's website, so I made my own version</p>
           <p class="project-tech">tech: rust</p>
         </div>
       </file>
-      <file fileName="mun.md" date="2024/6">
+      <file fileName="mun.md" date="2024/6" gh="https://github.com/13carpileup/kgvmun">
         <div class="project-content">
           <h2 class="project-title">kgvmun</h2>
           <p class="project-description">my first and last 'serious' attempt at frontend dev</p>

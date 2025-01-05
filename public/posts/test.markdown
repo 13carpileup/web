@@ -74,4 +74,4 @@ If we just mirror and reverse it, we get...
 
 ![flag](../imgs/flag.png)
 
-`hkcert24{do_you_know_the_cool_penguin}`. herherha
+```hkcert24{do_you_know_the_cool_penguin}```. herherha

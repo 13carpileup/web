@@ -2,7 +2,8 @@
 
 defineProps<{
   fileName: string,
-  date?: string
+  date?: string,
+  gh?: string,
 }>()
 
 </script>
@@ -10,8 +11,15 @@ defineProps<{
 <template>
   <div class="file-container">
     <div class="file-header">
-
-      <p class="file-meta">{{ fileName }} <span v-if="date">- {{ date }}</span></p>
+      <p class="file-meta">
+        {{ fileName }} 
+        <span v-if="date">- {{ date }}</span> 
+        <span v-if="gh" class="github-link">
+          <a target="_blank" :href="gh" class="github-anchor">
+            <img class="github-image" src="../../gh.png" alt="GitHub"/>
+          </a>
+        </span>
+      </p>
     </div>
     <div class="file-content">
       <slot></slot>
@@ -20,6 +28,33 @@ defineProps<{
 </template>
 
 <style scoped>
+.github-image {
+  width: 18px; 
+  height: 18px;
+  opacity: 0.7; 
+  transition: opacity 0.2s ease;
+  vertical-align: middle; 
+  margin-left: 8px; 
+}
+
+.github-link {
+  float: right;
+  display: inline-flex;
+  align-items: center;
+}
+
+.github-anchor {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.github-anchor:hover .github-image {
+  opacity: 1;
+}
+
 .file-container {
   background: #222222;
   border: 1px solid #333;
