@@ -72,6 +72,10 @@ import blog from '../components/blog.vue'
   font-style: italic;
 }
 
+a {
+  text-decoration: none;
+}
+
 @media (max-width: 768px) {
 
   .projects-grid {

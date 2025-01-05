@@ -4,7 +4,7 @@ import file from '../components/file.vue'
 
 <template>
   <main class="projects-container">
-    <h2>Uh... Not sure where you are. You're lost in a series of tubes...</h2>
+    <h1>Uh... Not sure where you are. You're lost in a series of tubes...</h1>
   </main>
 </template>
 

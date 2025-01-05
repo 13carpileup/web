@@ -78,9 +78,18 @@ watch(() => route.name, async (newRouteName) => {
   <div class = "content">
     <RouterView />
   </div>
+
+  <div class ="preloading">
+    <img class="github-image" src="/gh.png" alt="GitHub"/>
+    <img class="github-image" src="/back.png" alt="Back"/>
+  </div>
 </template>
 
 <style scoped>
+.preloading {
+  display: none;
+}
+
 .joke {
   color: rgb(89, 103, 85);
 }
