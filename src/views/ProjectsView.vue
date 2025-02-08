@@ -33,7 +33,7 @@ import file from '../components/file.vue'
           <p class="project-description">a partially functioning wikipedia scraper</p>
           <p class="project-link">
             Access: 
-            <a target="_blank" href="http://wiki.alexclimie.com:8000/">wiki.alexclimie.com</a>
+            <a target="_blank" href="http://wiki.alexclimie.com:3000/">wiki.alexclimie.com</a>
           </p>
           <p class="project-tech">tech: expressjs, postgres, py</p>
         </div>
