@@ -9,13 +9,13 @@ import file from '../components/file.vue'
       <p>i am an ib victim (i.e. i spend all of my time complaining and none of it studying)</p>
     </file>
     <file fileName="tech.md" class = "content" id = "tech">
-      <p class = "body">i like playing ctfs, coding barely functional programs, and hardware. i'm currently working on a legally distinct version of block blast, except with co-op!</p>
+      <p class = "body">i like playing ctfs, coding barely functional programs, and math. currently... waiting for uni decisions. can't code anything when i have to check my email every hour!</p>
       <div class = "tech-stack">
         <span class = "tech-item">rust</span>
         <span class = "tech-item">c++</span>
         <span class = "tech-item">js</span>
         <span class = "tech-item">py</span>
-        <span class = "tech-item">i use arch btw</span>
+        <span class = "tech-item">archbtw</span>
       </div>
     </file>
     <file fileName="socials.md" class = "content" id = "socials">

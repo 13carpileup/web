@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/ProjectsView.vue'),
     },
     {
+      path: '/gallery',
+      name: 'gallery',
+      component: () => import('../views/GalleryView.vue'),
+    },
+    {
       path: '/blog',
       name: 'blog',
       component: () => import('../views/BlogView.vue'),
@@ -28,7 +33,8 @@ const router = createRouter({
       path: "/:pathMatch(.*)*",
       name: "ERROR_LOST_404",
       component: () => import('../views/404View.vue'), 
-    }
+    },
+    
   ],
 })
 

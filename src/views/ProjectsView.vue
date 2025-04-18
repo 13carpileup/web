@@ -5,6 +5,17 @@ import file from '../components/file.vue'
 <template>
   <main class="projects-container">
     <div class="projects-grid">
+      <file fileName="moodle.md" date="2025/3">
+        <div class="project-content">
+          <h2 class="project-title">Graduation Tracker</h2>
+          <p class="project-description">Graduation countdown, exam countdown, and friend analyzer all rolled into one. Names have since been anonymized for privacy, so no public github☹️</p>
+          <p class="project-link">
+            Access: 
+            <a target="_blank" href="https://graduation.alexclimie.com/">graduation.alexclimie.com</a>
+          </p>
+          <p class="project-tech">tech: rust, vue, digitalocean</p>
+        </div>
+      </file>
       <file fileName="topdownuniverse.md" date="2024/12" gh="https://github.com/13carpileup/topdownuniverse">
         <div class="project-content">
           <h2 class="project-title">Top-Down Universe</h2>
@@ -36,13 +47,6 @@ import file from '../components/file.vue'
             <a target="_blank" href="http://wiki.alexclimie.com:3000/">wiki.alexclimie.com</a>
           </p>
           <p class="project-tech">tech: expressjs, postgres, py</p>
-        </div>
-      </file>
-      <file fileName="lionel3.md" date="2024/6" gh="https://github.com/13carpileup/lionel3">
-        <div class="project-content">
-          <h2 class="project-title">Lionel 3</h2>
-          <p class="project-description">i don't like my school's website, so I made my own version</p>
-          <p class="project-tech">tech: rust</p>
         </div>
       </file>
       <file fileName="mun.md" date="2024/6" gh="https://github.com/13carpileup/kgvmun">
