@@ -132,13 +132,16 @@ pub async fn process_auth(
     pool: web::Data<DbPool>
 ) -> impl Responder {
     println!("lovely state: {}", info.state);
+    dotenv::dotenv().ok();
+
+    let domain = env::var("URL").unwrap();
 
     let auth = get_client_authorization();
 
     let params = [
         ("grant_type", "authorization_code"),
         ("code", &info.code), 
-        ("redirect_uri", "http://127.0.0.1:8080/process_auth"),
+        ("redirect_uri", &format!("{domain}process_auth")),
     ];
 
     let client = reqwest::Client::new();
