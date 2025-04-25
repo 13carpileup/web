@@ -1,35 +1,94 @@
 <script setup lang="ts">
-import file from '../components/file.vue'
+import { ref } from 'vue';
+import file from '../components/file.vue';
+
+const searchTerm = ref('');
+const searchResults = ref([]);
+const isSearching = ref(false);
+
+const searchSongs = async () => {
+  if (!searchTerm.value) {
+    searchResults.value = [];
+    return;
+  }
+  
+  isSearching.value = true;
+  try {
+    const response = await fetch(`http://127.0.0.1:8080/search?search_term=${encodeURIComponent(searchTerm.value)}`);
+    const data = await response.json();
+    searchResults.value = data;
+  } catch (error) {
+    console.error('Error searching songs:', error);
+  } finally {
+    isSearching.value = false;
+  }
+};
+
+const addSongToQueue = async (uri: string) => {
+  try {
+    await fetch(`http://127.0.0.1:8080/add_song?uri=${encodeURIComponent(uri)}`);
+    searchTerm.value = '';
+    searchResults.value = [];
+  } catch (error) {
+    console.error('Error adding song to queue:', error);
+  }
+};
 </script>
 
 <template>
-  <main class = "all">
-    <file fileName="me.md" class = "content" id = "me">
-      <h1 class = "intro">hi! I'm alex, a high school student.</h1>
-      <p>i am an ib victim (i.e. i spend all of my time complaining and none of it studying)</p>
-    </file>
-    <file fileName="tech.md" class = "content" id = "tech">
-      <p class = "body">i like playing ctfs, coding barely functional programs, and math. currently... waiting for uni decisions. can't code anything when i have to check my email every hour!</p>
-      <div class = "tech-stack">
-        <span class = "tech-item">rust</span>
-        <span class = "tech-item">c++</span>
-        <span class = "tech-item">js</span>
-        <span class = "tech-item">py</span>
-        <span class = "tech-item">archbtw</span>
+<main class="all">
+  <file fileName="me.md" class="content" id="me">
+    <h1 class="intro">hi! I'm alex, a high school student.</h1>
+    <p>i am an ib victim (i.e. i spend all of my time complaining and none of it studying)</p>
+  </file>
+
+  <file fileName="tech.md" class="content" id="tech">
+    <p class="body">i like playing ctfs, coding barely functional programs, and math. currently... waiting for uni decisions. can't code anything when i have to check my email every hour!</p>
+    <div class="tech-stack">
+      <span class="tech-item">rust</span>
+      <span class="tech-item">c++</span>
+      <span class="tech-item">js</span>
+      <span class="tech-item">py</span>
+      <span class="tech-item">archbtw</span>
+    </div>
+  </file>
+
+  <file fileName="socials.md" class="content" id="socials">
+    <p class="body">find me on discord (13carpileup)</p>
+  </file>
+
+  <file fileName="songs.md" class="content" id="songs">
+    <h2 class="body">give me a song request!</h2>
+    <div class="search-container">
+      <input 
+        type="text" 
+        v-model="searchTerm" 
+        @input="searchSongs"
+        placeholder="Search for a song..."
+        class="search-input"
+      />
+      <div v-if="searchResults.length > 0" class="search-results">
+        <div 
+          v-for="song in searchResults" 
+          :key="song.id"
+          @click="addSongToQueue(song.uri)"
+          class="search-result-item"
+        >
+          <span class="song-name">{{ song.name }}</span>
+          <span class="artist-name">{{ song.artists[0].name }}</span>
+        </div>
       </div>
-    </file>
-    <file fileName="socials.md" class = "content" id = "socials">
-      <p class = "body">find me on discord (13carpileup)</p>
-    </file>
-  </main>
+    </div>
+    <br>
+    <p>Songs are automatically added to my spotify queue</p>
+  </file>
+</main>
 </template>
 
 <style scoped>
-
 .all {
   padding-left: 8rem;
   padding-right: 8rem;
-
 }
 
 .content:not(:last-child) {
@@ -38,10 +97,7 @@ import file from '../components/file.vue'
 
 .content {
   margin: auto;
-}
-
-.content:not(:last-child) {
-  margin-bottom: 1.5rem;
+  overflow: visible;
 }
 
 .intro {
@@ -68,6 +124,59 @@ import file from '../components/file.vue'
   font-family: 'JetBrains Mono', monospace;
   border: 1px solid rgba(130, 87, 229, 0.2);
   transition: all 0.2s ease;
+}
+
+.search-container {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: rgba(130, 87, 229, 0.1);
+  border: 1px solid rgba(130, 87, 229, 0.2);
+  border-radius: 20px;
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  outline: none;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(18, 18, 18, 0.95);
+  border: 1px solid rgba(130, 87, 229, 0.2);
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  max-height: 300px;
+  overflow-y: scroll;
+  z-index: 10;
+}
+
+.search-result-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background: rgba(130, 87, 229, 0.1);
+}
+
+.song-name {
+  color: white;
+  font-size: 0.9rem;
+}
+
+.artist-name {
+  color: rgb(219, 219, 219);
+  font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {

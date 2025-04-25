@@ -66,14 +66,15 @@ pub struct TokenData {
 
 #[get("/authorize")]
 async fn authorize() -> impl Responder {
+    let domain = env::var("URL").unwrap();
     let client_id = "d65280f93fa443a3a8f14569b2b32ab9";
-    let redirect_url = "http://127.0.0.1:8080/process_auth";
+    let redirect_url = format!("{domain}process_auth");
     let scope = "user-read-recently-played user-read-playback-state user-modify-playback-state user-read-currently-playing streaming app-remote-control";
     let url = "https://accounts.spotify.com/authorize";
     let queries = stringify(vec![
         ("response_type","code"),
         ("client_id", client_id),
-        ("redirect_uri", redirect_url),
+        ("redirect_uri", &redirect_url),
         ("scope", scope),
         ("state", "meowmeowbeans")
     ]);
