@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import file from '../components/file.vue';
 
 const searchTerm = ref('');
-const searchResults = ref([]);
+
+const searchResults = ref<{uri: string, id:string, name:string, artists:{name:string}[]}[]>([]);
 const isSearching = ref(false);
 
 const searchSongs = async () => {
@@ -14,7 +15,7 @@ const searchSongs = async () => {
   
   isSearching.value = true;
   try {
-    const response = await fetch(`http://127.0.0.1:8080/search?search_term=${encodeURIComponent(searchTerm.value)}`);
+    const response = await fetch(`https://wiki.alexclimie.com/api/search?search_term=${encodeURIComponent(searchTerm.value)}`);
     const data = await response.json();
     searchResults.value = data;
   } catch (error) {
@@ -26,7 +27,7 @@ const searchSongs = async () => {
 
 const addSongToQueue = async (uri: string) => {
   try {
-    await fetch(`http://127.0.0.1:8080/add_song?uri=${encodeURIComponent(uri)}`);
+    await fetch(`https://wiki.alexclimie.com/api/add_song?uri=${encodeURIComponent(uri)}`);
     searchTerm.value = '';
     searchResults.value = [];
   } catch (error) {
