@@ -5,6 +5,7 @@ use querystring::stringify;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::env;
+use dotenv;
 
 mod gent;
 mod spotify;
@@ -66,6 +67,8 @@ pub struct TokenData {
 
 #[get("/authorize")]
 async fn authorize() -> impl Responder {
+    dotenv::dotenv().ok();
+
     let domain = env::var("URL").unwrap();
     let client_id = "d65280f93fa443a3a8f14569b2b32ab9";
     let redirect_url = format!("{domain}process_auth");
