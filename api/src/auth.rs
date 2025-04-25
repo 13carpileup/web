@@ -65,7 +65,10 @@ pub async fn refresh_token(refresh_token: &str) -> super::TokenData {
         .await
         .unwrap();
 
-    let body: super::TokenData = serde_json::from_str(&res.text().await.unwrap()).unwrap();
+    let x = &res.text().await.unwrap();
+    println!("btext, {b}", b = x.clone());
+    let body: super::TokenData = serde_json::from_str(x).unwrap();
+    
     return body;
 } 
 
@@ -107,18 +110,20 @@ pub async fn get_token_authoritzation(pool: web::Data<DbPool>) -> String {
 
         for t in t_iter {
             let row = t.unwrap();
+            println!("Refreshing token which was fetched at t = {time}", time = row.time);
 
             let new_access = refresh_token(&row.refresh_token).await;
 
-            conn.execute("INSERT INTO tokens VALUES (?1, ?2, ?3)", params![new_access.access_token, new_access.refresh_token, epoch_time]).unwrap();
+            conn.execute("INSERT INTO tokens VALUES (?1, ?2, ?3)", params![new_access.access_token, row.refresh_token, epoch_time]).unwrap();
         }
 
-        let access_token: String = conn.query_row("SELECT * FROM tokens", [], |row| row.get(0)).unwrap();
+        conn.execute("DELETE FROM tokens WHERE time < ?1", [hour_ago]).unwrap();
 
+        let access_token: String = conn.query_row("SELECT * FROM tokens", [], |row| row.get(0)).unwrap();
+        println!("{a}", a=format!("Bearer {access_token}"));
         return format!("Bearer {access_token}");
     }
 
-    conn.execute("DELETE FROM tokens WHERE time < ?1", [hour_ago]).unwrap();
 
     println!("{res} NUMBER OF TOKENS HERE!");
 

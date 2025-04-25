@@ -59,7 +59,7 @@ struct Info {
 #[derive(Serialize, Deserialize)]
 pub struct TokenData {
     access_token: String,
-    refresh_token: String,
+    refresh_token: Option<String>,
     scope: String,
     expires_in: u64,
     token_type: String

@@ -146,11 +146,20 @@ pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
     let client = reqwest::Client::new();
     let res = client.post("https://api.spotify.com/v1/me/player/queue")
         .query(&params)
-        .header("Authorization", auth)
+        .header("Authorization", auth.clone())
         .header("Content-Length", 0)
         .send()
         .await
         .unwrap();
 
+    let res1 = client.get("https://api.spotify.com/v1/me/player")
+        .header("Authorization", auth)
+        .send()
+        .await
+        .unwrap();
+
+    let device: serde_json::Value = serde_json::from_str(&res1.text().await.unwrap()).unwrap();
+    
+    println!("device code: {d}", d = device["id"]);
     println!("response came back with: {code}", code = res.status());
 }
