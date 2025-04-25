@@ -1,18 +1,68 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_cors::Cors;
+use actix_web::{get, post, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
+use auth::DbPool;
 use querystring::stringify;
+use serde::{Deserialize, Serialize};
+use serde_json::{Value, json};
+use std::env;
 
 mod gent;
+mod spotify;
+mod auth;
+
+#[get("/pause")]
+async fn pause(pool: web::Data<DbPool>) -> impl Responder {
+    spotify::pause_playback(pool).await;
+
+    HttpResponse::Ok().body("paused?")
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Uri {
+    uri: String
+}
+
+#[get("/add_song")]
+async fn add_song(uri: web::Query<Uri>, pool: web::Data<DbPool>) -> impl Responder {
+    println!("URI: {u}", u=uri.uri.clone());
+    
+    spotify::add_song(uri.uri.clone(), pool).await;
+
+    HttpResponse::Ok().body("added?")
+}
 
 #[get("/")]
 async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
 }
 
-#[get("/process_auth")]
-async fn process_auth() -> impl Responder {
-    HttpResponse::Ok().body("pluh")
+#[derive(Serialize, Deserialize)]
+pub struct Search {
+    search_term: String
 }
 
+#[get("/search")]
+async fn search(search: web::Query<Search>, pool: web::Data<DbPool>) -> impl Responder {
+    let res = spotify::search(&search.search_term, pool).await;
+    println!("Searching for {s}", s = search.search_term);
+    
+    HttpResponse::Ok().body(json!(res).to_string())
+}
+
+#[derive(Deserialize)]
+struct Info {
+    code: String,
+    state: String
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct TokenData {
+    access_token: String,
+    refresh_token: String,
+    scope: String,
+    expires_in: u64,
+    token_type: String
+}
 
 #[get("/authorize")]
 async fn authorize() -> impl Responder {
@@ -23,12 +73,12 @@ async fn authorize() -> impl Responder {
     let queries = stringify(vec![
         ("response_type","code"),
         ("client_id", client_id),
-        ("redirect_url", redirect_url),
+        ("redirect_uri", redirect_url),
         ("scope", scope),
         ("state", "meowmeowbeans")
     ]);
 
-    let full_url = format!("{url}{queries}");
+    let full_url = format!("{url}?{queries}");
 
     HttpResponse::Ok().body(full_url)
 }
@@ -44,12 +94,24 @@ async fn manual_hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
+    let db_path = "main.db";
+
+    let pool = auth::initialize_db_pool(&db_path)
+        .expect("Failed to initialize database pool.");
+    
+    HttpServer::new(move || {
+        let cors = Cors::default().allow_any_origin().send_wildcard();
+
         App::new()
+            .app_data(web::Data::new(pool.clone()))
+            .wrap(cors)
             .service(hello)
             .service(echo)
             .service(authorize)
-            .service(process_auth)
+            .service(auth::process_auth)
+            .service(pause)
+            .service(add_song)
+            .service(search)
             .service(gent::hello)
             .route("/hey", web::get().to(manual_hello))
     })
