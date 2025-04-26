@@ -1,10 +1,11 @@
 use actix_web::web;
 use dotenv::dotenv;
 use serde::{Deserialize, Serialize};
+use serde_json::Value;
 use std::env;
 use base64::prelude::*;
 use reqwest;
-use crate::auth::DbPool;
+use crate::auth::{get_token_authoritzation, DbPool};
 
 use super::auth;
 
@@ -140,7 +141,8 @@ pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
     let auth = auth::get_token_authoritzation(pool).await;
 
     let params = vec![
-        ("uri", uri)
+        ("uri", uri),
+        ("device_id", "c8fcbcc4ad03082bfdb03218cf49746cf08e87fe".to_string())
     ];
 
     let client = reqwest::Client::new();
@@ -151,15 +153,35 @@ pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
         .send()
         .await
         .unwrap();
+}
 
-    let res1 = client.get("https://api.spotify.com/v1/me/player")
+#[derive(Serialize, Deserialize)]
+pub struct Device {
+    id: String,
+    is_active: bool,
+    name: String,
+}
+
+pub async fn device_info(pool: web::Data<DbPool>) -> Device {
+    let auth = get_token_authoritzation(pool).await;
+    
+    let client = reqwest::Client::new();
+    let res = client.get("https://api.spotify.com/v1/me/player")
         .header("Authorization", auth)
         .send()
-        .await
-        .unwrap();
+        .await;
 
-    let device: serde_json::Value = serde_json::from_str(&res1.text().await.unwrap()).unwrap();
-    
-    println!("device code: {d}", d = device["id"]);
-    println!("response came back with: {code}", code = res.status());
+    let raw_response: Value = serde_json::from_str(&res.unwrap().text().await.unwrap()).unwrap();
+
+    let device = Device {
+        id: raw_response["device"]["id"].to_string(),
+        is_active: match raw_response["is_playing"].to_string().as_str() {
+            "true" => true,
+            "false" => false,
+            _ => false
+        },
+        name: raw_response["device"]["name"].to_string()
+    };
+
+    device
 }

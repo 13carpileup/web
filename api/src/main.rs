@@ -65,6 +65,14 @@ pub struct TokenData {
     token_type: String
 }
 
+#[get("/info")]
+async fn device_info(pool: web::Data<DbPool>) -> impl Responder {
+    let resp = spotify::device_info(pool).await;
+
+    HttpResponse::Ok().body(json!(resp).to_string())
+}
+
+
 #[get("/authorize")]
 async fn authorize() -> impl Responder {
     dotenv::dotenv().ok();
@@ -116,6 +124,7 @@ async fn main() -> std::io::Result<()> {
             .service(pause)
             .service(add_song)
             .service(search)
+            .service(device_info)
             .service(gent::hello)
             .route("/hey", web::get().to(manual_hello))
     })
