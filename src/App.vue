@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useRoute, RouterLink, RouterView } from 'vue-router';
 
 const route = useRoute();
@@ -40,9 +40,23 @@ function deleteText(n: number, time: number, speed = 65) {
 let lastUpdate = 0;
 let lastRoute = ''
 
-watch(() => route.name, async (newRouteName) => {
+const newRouteName = ref<string | null>(null);
+
+onMounted(() => {
+  newRouteName.value = route.name as string | null;
+  updateLocation();
+});
+
+watch(() => route.name, (newRoute) => {
+  newRouteName.value = newRoute as string | null;
+  updateLocation();
+});
+
+async function updateLocation() {
+  if (!newRouteName.value) return;
+
   lastUpdate = Date.now();
-  let newLocation = `${String(newRouteName)}`;
+  let newLocation = `${String(newRouteName.value)}`;
 
   if (newLocation != "undefined" && newLocation != "null") {
     // you see.. by recalling Date.now(), we avoid a race condition.... very important stuff ....
@@ -58,28 +72,28 @@ watch(() => route.name, async (newRouteName) => {
     }
     lastRoute = newLocation;
   }
-  
-});
-
+}
 </script>
 
 <template>
   <header>    
     <div class="wrapper">
-      <h2 class = "location">~/alex_climie/{{ typedLocation }}</h2>
+      <div class="location-container">
+        <h2 class="location">~/alex_climie/{{ typedLocation }}</h2>
+      </div>
       <nav>
-        <p class = "joke">[alex@web]$ cd </p>
-        <RouterLink class="link" to="/"><span class = "phone-hide">../</span>home</RouterLink>
-        <RouterLink class="link" to="/projects"><span class = "phone-hide">../</span>projects</RouterLink>
-        <RouterLink class="link" to="/blog"><span class = "phone-hide">../</span>blog</RouterLink>
+        <p class="joke">[alex@web]$ cd </p>
+        <RouterLink class="link" to="/"><span class="phone-hide">../</span>home</RouterLink>
+        <RouterLink class="link" to="/projects"><span class="phone-hide">../</span>projects</RouterLink>
+        <RouterLink class="link" to="/blog"><span class="phone-hide">../</span>blog</RouterLink>
       </nav>
     </div>
-</header>
-  <div class = "content">
+  </header>
+  <div class="content">
     <RouterView />
   </div>
 
-  <div class ="preloading">
+  <div class="preloading">
     <img class="github-image" src="/gh.png" alt="GitHub"/>
     <img class="github-image" src="/back.png" alt="Back"/>
   </div>
@@ -105,10 +119,18 @@ watch(() => route.name, async (newRouteName) => {
   border-radius: 10px;
 }
 
+.location-container {
+  display: flex;
+  align-items: center;
+}
 
 .location {
-  color: #b2ffb5;
+  color: #4ade80; /* Bright terminal green */
+  font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
 }
 
 .wrapper {
@@ -171,7 +193,5 @@ nav a.router-link-exact-active {
   .phone-hide {
     display: none;
   }
-
-
 }
 </style>

@@ -95,13 +95,6 @@ a {
   position: relative;
 }
 
-.file-container:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2),
-              0 0 0 1px rgba(255, 255, 255, 0.1),
-              0 0 32px rgba(130, 87, 229, 0.1);
-}
-
 .file-header {
   background: #2a2a2a;
   padding: 0.75rem 1rem;

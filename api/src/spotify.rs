@@ -160,6 +160,8 @@ pub struct Device {
     id: String,
     is_active: bool,
     name: String,
+    song_name: Option<String>,
+    song_artist: Option<String>,
 }
 
 pub async fn device_info(pool: web::Data<DbPool>) -> Device {
@@ -173,15 +175,29 @@ pub async fn device_info(pool: web::Data<DbPool>) -> Device {
 
     let raw_response: Value = serde_json::from_str(&res.unwrap().text().await.unwrap()).unwrap();
 
-    let device = Device {
-        id: raw_response["device"]["id"].to_string(),
-        is_active: match raw_response["is_playing"].to_string().as_str() {
-            "true" => true,
-            "false" => false,
-            _ => false
-        },
-        name: raw_response["device"]["name"].to_string()
+    let is_active = match raw_response["is_playing"].to_string().as_str() {
+        "true" => true,
+        "false" => false,
+        _ => false
     };
 
-    device
+    println!("is active: {is_active}");
+
+    if !is_active {
+        return Device {
+            id: raw_response["device"]["id"].to_string(),
+            is_active: is_active,
+            name: raw_response["device"]["name"].to_string(),
+            song_name: None,
+            song_artist: None,
+        };
+    }
+
+    return Device {
+        id: raw_response["device"]["id"].to_string(),
+        is_active: is_active,
+        name: raw_response["device"]["name"].to_string(),
+        song_name: Some(raw_response["item"]["name"].to_string()),
+        song_artist: Some(raw_response["item"]["artists"][0]["name"].to_string()),
+    };
 }
