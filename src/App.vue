@@ -125,7 +125,7 @@ async function updateLocation() {
 }
 
 .location {
-  color: #4ade80; /* Bright terminal green */
+  color: #4ade80; /* Bright terminal green */ /*thank u gpt for the colour selection*/
   font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
   font-weight: 300;
