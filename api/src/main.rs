@@ -1,4 +1,5 @@
 use actix_cors::Cors;
+use actix_web::http::header::REFERER;
 use actix_web::{get, post, web, App, HttpRequest, HttpResponse, HttpServer, Responder};
 use auth::DbPool;
 use querystring::stringify;
@@ -6,6 +7,10 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::env;
 use dotenv;
+use tokio_cron_scheduler::{JobScheduler, Job}; // <-- Add this
+use std::time::Duration; // Still needed
+use std::sync::Arc;
+
 
 mod gent;
 mod spotify;
@@ -73,6 +78,14 @@ async fn device_info(pool: web::Data<DbPool>) -> impl Responder {
 }
 
 
+#[get("/freshen_data")]
+async fn refresh_token(pool: web::Data<DbPool>) -> impl Responder {
+    let resp = auth::get_token_authoritzation(pool).await;
+
+    HttpResponse::Ok().body("Don't mind me!")
+}
+
+
 #[get("/authorize")]
 async fn authorize() -> impl Responder {
     dotenv::dotenv().ok();
@@ -104,13 +117,23 @@ async fn manual_hello() -> impl Responder {
     HttpResponse::Ok().body("Hey there!")
 }
 
+async fn refresh_token_job(pool: web::Data<DbPool>) {
+    let resp = auth::get_token_authoritzation(pool).await;
+
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let db_path = "main.db";
 
     let pool = auth::initialize_db_pool(&db_path)
         .expect("Failed to initialize database pool.");
-    
+
+    let sched = JobScheduler::new().await
+        .expect("ruh roh");
+
+    let pool_for_job = web::Data::new(pool.clone());
+
     HttpServer::new(move || {
         let cors = Cors::default().allow_any_origin().send_wildcard();
 
@@ -123,6 +146,7 @@ async fn main() -> std::io::Result<()> {
             .service(auth::process_auth)
             .service(pause)
             .service(add_song)
+            .service(refresh_token)
             .service(search)
             .service(device_info)
             .service(gent::hello)
