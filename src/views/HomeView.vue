@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import file from '../components/file.vue';
 
 const searchTerm = ref('');
 
 const searchResults = ref<{uri: string, id:string, name:string, artists:{name:string}[]}[]>([]);
 const isSearching = ref(false);
+
 
 const searchSongs = async () => {
   if (!searchTerm.value) {
@@ -34,6 +35,10 @@ const addSongToQueue = async (uri: string) => {
     console.error('Error adding song to queue:', error);
   }
 };
+
+onMounted(async () => {
+  const response = await fetch('https://wiki.alexclimie.com/api/freshen_data');
+})
 </script>
 
 <template>
