@@ -44,27 +44,27 @@ onMounted(async () => {
 <template>
 <main class="all">
   <file fileName="me.md" class="content" id="me">
-    <h1 class="intro">hi! I'm alex, a high school student.</h1>
-    <p>i am an ib victim (i.e. i spend all of my time complaining and none of it studying)</p>
+    <h1 class="intro">Hi! I'm Alex, an incoming UBC student.</h1>
+    <p>I am studying computer science and mathematics.</p>
   </file>
 
   <file fileName="tech.md" class="content" id="tech">
-    <p class="body">i like playing ctfs, coding barely functional programs, and math. currently... waiting for uni decisions. can't code anything when i have to check my email every hour!</p>
+    <p class="body">I have a lot of interests! Theoretical CS (algorithms, computation, etc) and abstract math form a significant subset of them, though.</p>
     <div class="tech-stack">
-      <span class="tech-item">rust</span>
-      <span class="tech-item">c++</span>
-      <span class="tech-item">js</span>
+      <span class="tech-item">Rust</span>
+      <span class="tech-item">C++</span>
+      <span class="tech-item">JS</span>
       <span class="tech-item">py</span>
       <span class="tech-item">archbtw</span>
     </div>
   </file>
 
-  <file fileName="socials.md" class="content" id="socials">
-    <p class="body">find me on discord (13carpileup)</p>
+  <file fileName="music.md" class="content" id="socials">
+    <p class="body">Reach out via email for anything formal (climiealex@gmail.com), or discord for anything at all (13carpileup).</p>
   </file>
 
   <file fileName="songs.md" class="content" id="songs">
-    <h2 class="body">give me a song request!</h2>
+    <h2 class="body">Send a song request</h2>
     <div class="search-container">
       <input 
         type="text" 
@@ -86,7 +86,7 @@ onMounted(async () => {
       </div>
     </div>
     <br>
-    <p>Songs are automatically added to my spotify queue</p>
+    <p>Your suggested song will be automatically added to my spotify queue</p>
   </file>
 </main>
 </template>

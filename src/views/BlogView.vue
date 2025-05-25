@@ -11,7 +11,7 @@ import blog from '../components/blog.vue'
       <file fileName="hkcert.md" date="2024/11/17">
         <div class="project-content">
           <h2 class="project-title">HKCERT CTF</h2>
-          <p class="project-description">a writeup of the electronic cookbook cryptography challenge @ hkcert 2024 qualifiers. click to read!</p>
+          <p class="project-description">A writeup of the electronic cookbook cryptography challenge @ HKCERT 2024 qualifiers. Click to read!</p>
         </div>
       </file>
     </RouterLink>
