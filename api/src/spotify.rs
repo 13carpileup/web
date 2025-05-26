@@ -6,6 +6,7 @@ use std::env;
 use base64::prelude::*;
 use reqwest;
 use crate::auth::{get_token_authoritzation, DbPool};
+use std::fs::File;
 
 use super::auth;
 
@@ -137,11 +138,15 @@ pub async fn search(search_term: &str, pool: web::Data<DbPool>) -> Vec<TrackItem
     vec![]
 }
 
+use std::fs::OpenOptions;
+use std::io::Write;
+use chrono;
+
 pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
     let auth = auth::get_token_authoritzation(pool).await;
 
     let params = vec![
-        ("uri", uri),
+        ("uri", uri.clone()),
         ("device_id", "c8fcbcc4ad03082bfdb03218cf49746cf08e87fe".to_string())
     ];
 
@@ -153,6 +158,18 @@ pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
         .send()
         .await
         .unwrap();
+
+    let mut data_file = OpenOptions::new()
+        .append(true)
+        .open("log.txt")
+        .expect("cannot open file");
+
+    let date = chrono::offset::Local::now();
+
+    data_file
+        .write(format!("{date}: added {uri}").as_bytes())
+        .expect("write failed");
+
 }
 
 #[derive(Serialize, Deserialize)]
