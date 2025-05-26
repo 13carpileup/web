@@ -167,7 +167,7 @@ pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
     let date = chrono::offset::Local::now();
 
     data_file
-        .write(format!("{date}: added {uri}").as_bytes())
+        .write(format!("{date}: added {uri}\n").as_bytes())
         .expect("write failed");
 
 }
