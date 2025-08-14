@@ -239,7 +239,7 @@ pub async fn get_song(pool: web::Data<DbPool>) -> String {
             }
         
         }
-        Err(_) => todo!(),
+        Err(_) => return "N/A".to_string(),
     }
 
     "N/A".to_string()
