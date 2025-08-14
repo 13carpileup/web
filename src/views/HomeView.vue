@@ -7,7 +7,7 @@ const searchTerm = ref('');
 const searchResults = ref<{uri: string, id:string, name:string, artists:{name:string}[]}[]>([]);
 const isSearching = ref(false);
 
-const url = "http://127.0.0.1:8080"
+const url = "https://wiki.alexclimie.com/api"
 
 const currentSong = ref<string | null>(null);
 const fetchCurrentSong = async () => {
