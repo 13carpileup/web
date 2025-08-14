@@ -7,6 +7,44 @@ const searchTerm = ref('');
 const searchResults = ref<{uri: string, id:string, name:string, artists:{name:string}[]}[]>([]);
 const isSearching = ref(false);
 
+const url = "http://127.0.0.1:8080"
+
+const currentSong = ref<string | null>(null);
+const fetchCurrentSong = async () => {
+  try {
+    const res = await fetch(`${url}/get_current_song`);
+    if (!res.ok) throw new Error(`Failed to fetch current song: ${res.status}`);
+    const text = await res.text();
+
+    if (text == "N/A") {
+      currentSong.value = "not playing anything right now!"
+    }
+    else {
+      currentSong.value = "currently listening to " + text;
+    }
+  } catch (e) {
+    console.error(e);
+    currentSong.value = null;
+  }
+};
+
+const showToast = ref(false);
+const toastMessage = ref('');
+const toastType = ref<'success' | 'error'>('success');
+let toastTimeout: number | undefined;
+
+const showNotification = (message: string, type: 'success' | 'error' = 'success') => {
+  toastMessage.value = message;
+  toastType.value = type;
+  showToast.value = true;
+
+  if (toastTimeout) {
+    clearTimeout(toastTimeout);
+  }
+  toastTimeout = window.setTimeout(() => {
+    showToast.value = false;
+  }, 2500);
+};
 
 const searchSongs = async () => {
   if (!searchTerm.value) {
@@ -16,7 +54,8 @@ const searchSongs = async () => {
   
   isSearching.value = true;
   try {
-    const response = await fetch(`https://wiki.alexclimie.com/api/search?search_term=${encodeURIComponent(searchTerm.value)}`);
+    const response = await fetch(`${url}/search?search_term=${encodeURIComponent(searchTerm.value)}`);
+    if (!response.ok) throw new Error(`Search failed: ${response.status}`);
     const data = await response.json();
     searchResults.value = data;
   } catch (error) {
@@ -28,17 +67,36 @@ const searchSongs = async () => {
 
 const addSongToQueue = async (uri: string) => {
   try {
-    await fetch(`https://wiki.alexclimie.com/api/add_song?uri=${encodeURIComponent(uri)}`);
+    const res = await fetch(`${url}/add_song?uri=${encodeURIComponent(uri)}`);
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      throw new Error(`Add song failed: ${res.status} ${errText}`);
+    }
+    showNotification('Song added to queue!', 'success');
     searchTerm.value = '';
     searchResults.value = [];
+    // Optionally refresh current song after adding
+    fetchCurrentSong();
   } catch (error) {
     console.error('Error adding song to queue:', error);
+    showNotification('Failed to add song. Please try again.', 'error');
   }
 };
 
 onMounted(async () => {
-  const response = await fetch('https://wiki.alexclimie.com/api/freshen_data');
-})
+  console.log(import.meta.env.VITE_URL);
+
+  try {
+    await fetch(`${url}/freshen_data`);
+  } catch {}
+
+  fetchCurrentSong();
+
+  setInterval(
+    fetchCurrentSong,
+    2000
+  )
+});
 </script>
 
 <template>
@@ -65,6 +123,10 @@ onMounted(async () => {
 
   <file fileName="songs.md" class="content" id="songs">
     <h2 class="body">Send a song request</h2>
+
+    <p class="current-song" v-if="currentSong">{{ currentSong }}</p>
+    <p class="current-song" v-else>currently listening to: Loading…</p>
+
     <div class="search-container">
       <input 
         type="text" 
@@ -88,6 +150,16 @@ onMounted(async () => {
     <br>
     <p>Your suggested song will be automatically added to my spotify queue</p>
   </file>
+
+  <div 
+    v-if="showToast" 
+    class="toast" 
+    :class="toastType === 'success' ? 'toast-success' : 'toast-error'"
+    role="status"
+    aria-live="polite"
+  >
+    {{ toastMessage }}
+  </div>
 </main>
 </template>
 
@@ -112,6 +184,13 @@ onMounted(async () => {
 
 .body {
   color: rgb(219, 219, 219);
+}
+
+.current-song {
+  color: rgb(219, 219, 219);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
 }
 
 .tech-stack {
@@ -185,10 +264,41 @@ onMounted(async () => {
   font-size: 0.8rem;
 }
 
+/* Toast styles */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  z-index: 9999;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(6px);
+}
+
+.toast-success {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.4);
+}
+
+.toast-error {
+  background: rgba(231, 76, 60, 0.2);
+  border-color: rgba(231, 76, 60, 0.4);
+}
+
 @media (max-width: 768px) {
   .all {
     padding-left: 0rem;
     padding-right: 0rem;
+  }
+  .toast {
+    width: calc(100% - 2rem);
+    bottom: 16px;
   }
 }
 </style>

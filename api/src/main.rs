@@ -34,7 +34,14 @@ async fn add_song(uri: web::Query<Uri>, pool: web::Data<DbPool>) -> impl Respond
     
     spotify::add_song(uri.uri.clone(), pool).await;
 
-    HttpResponse::Ok().body("added?")
+    HttpResponse::Ok().body("Song Added")
+}
+
+#[get("/get_current_song")]
+async fn get_current_song(pool: web::Data<DbPool>) -> impl Responder {
+    let current_song = spotify::get_song(pool).await;
+    
+    HttpResponse::Ok().body(current_song)
 }
 
 #[get("/")]
@@ -150,6 +157,7 @@ async fn main() -> std::io::Result<()> {
             .service(search)
             .service(device_info)
             .service(gent::hello)
+            .service(get_current_song)
             .route("/hey", web::get().to(manual_hello))
     })
     .bind(("127.0.0.1", 8080))?

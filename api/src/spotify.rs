@@ -87,6 +87,43 @@ pub struct Song {
     popularity: u64,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct PlaybackState {
+    pub device: Option<Device>,
+    pub repeat_state: Option<String>,
+    pub shuffle_state: bool,
+    pub context: Option<Context>,
+    pub timestamp: i64,
+    pub progress_ms: Option<i64>,
+    pub is_playing: bool,
+    pub item: Option<TrackItem>,
+    pub currently_playing_type: Option<String>,
+    pub actions: Option<Actions>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Actions {
+    pub interrupting_playback: Option<bool>,
+    pub pausing: Option<bool>,
+    pub resuming: Option<bool>,
+    pub seeking: Option<bool>,
+    pub skipping_next: Option<bool>,
+    pub skipping_prev: Option<bool>,
+    pub toggling_repeat_context: Option<bool>,
+    pub toggling_shuffle: Option<bool>,
+    pub toggling_repeat_track: Option<bool>,
+    pub transferring_playback: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Context {
+    #[serde(rename = "type")]
+    pub context_type: String,
+    pub href: String,
+    pub external_urls: Option<String>,
+    pub uri: String,
+}
+
 pub async fn pause_playback(pool: web::Data<DbPool>) {
     let auth = auth::get_token_authoritzation(pool).await;
 
@@ -170,6 +207,42 @@ pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
         .write(format!("{date}: added {uri}\n").as_bytes())
         .expect("write failed");
 
+}
+
+pub async fn get_song(pool: web::Data<DbPool>) -> String {
+    let auth = auth::get_token_authoritzation(pool).await;
+    let client = reqwest::Client::new();
+    
+    let res = client.get("https://api.spotify.com/v1/me/player/currently-playing")
+        .header("Authorization", auth.clone())
+        .send()
+        .await
+        .unwrap();
+
+    let r = res.text().await.unwrap();
+
+
+    match serde_json::from_str::<Value>(&r) {
+        Ok(raw_response) => {
+            let is_active = match raw_response["is_playing"].to_string().as_str() {
+                "true" => true,
+                "false" => false,
+                _ => false
+            };
+        
+            if is_active {
+                println!("{test}", test=raw_response["item"]);
+                let current_track = raw_response["item"]["name"].to_string();
+                let artist = raw_response["item"]["artists"][0]["name"].to_string();
+
+                return format!("{current_track} by {artist}");
+            }
+        
+        }
+        Err(_) => todo!(),
+    }
+
+    "N/A".to_string()
 }
 
 #[derive(Serialize, Deserialize)]
