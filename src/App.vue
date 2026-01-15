@@ -172,6 +172,7 @@ nav a.router-link-exact-active {
 
 @media (max-width: 768px) {
   .wrapper {
+    display:block;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
