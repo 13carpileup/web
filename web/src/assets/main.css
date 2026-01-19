@@ -1,0 +1,14 @@
+@import './base.css';
+
+#app {
+  font-weight: normal;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (hover: hover) {
+  a {
+    transition: all 0.3s ease; /* Smooth transition for the effect */
+  }
+}
