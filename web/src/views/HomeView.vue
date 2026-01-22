@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import file from '../components/file.vue';
+import Bookshelf from '../components/Bookshelf.vue';
 
 const searchTerm = ref('');
 
@@ -120,6 +121,11 @@ onMounted(async () => {
   <file fileName="music.md" class="content" id="socials">
     <p class="body">Reach out via email for anything formal (climiealex@gmail.com), or discord for anything at all (13carpileup).</p>
   </file>
+
+  <file fileName="books.md" class="content" id="books">
+    <Bookshelf />
+  </file>
+
 
   <file fileName="songs.md" class="content" id="songs">
     <h2 class="body">Send a song request</h2>
