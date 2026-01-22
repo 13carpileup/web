@@ -184,7 +184,7 @@ pub async fn add_song(uri: String, pool: web::Data<DbPool>) {
 
     let params = vec![
         ("uri", uri.clone()),
-        ("device_id", "c8fcbcc4ad03082bfdb03218cf49746cf08e87fe".to_string())
+        ("device_id", "6d8e29b11b5fbd8cc84425b43a0189802ebb9e75".to_string())
     ];
 
     let client = reqwest::Client::new();
