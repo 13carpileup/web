@@ -103,7 +103,7 @@ onMounted(async () => {
 <template>
 <main class="all">
   <file fileName="me.md" class="content" id="me">
-    <h1 class="intro">Hi! I'm Alex, a 1st year UBC student.</h1>
+    <h1 class="intro">Hi! I'm Alex, a UBC student.</h1>
     <p>I am studying computer science and mathematics.</p>
   </file>
 
