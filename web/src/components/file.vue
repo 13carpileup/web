@@ -48,7 +48,7 @@ defineProps<{
 .footer-text {
   font-style: italic;
   margin-left: 2rem;
-  color:rgb(128, 128, 128);
+  color: var(--text-3);
 }
 
 a {
@@ -62,6 +62,7 @@ a {
   transition: opacity 0.2s ease;
   vertical-align: middle; 
   margin-left: 8px; 
+  filter: var(--icon-filter);
 }
 
 .github-link {
@@ -87,21 +88,25 @@ a {
 }
 
 .file-container {
-  background: #222222;
-  border: 1px solid #333;
-  border-radius: 10px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
 }
 
 .file-header {
-  background: #2a2a2a;
+  background: var(--surface-3);
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--border-1);
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.file-header {
+  border-radius: 0;
 }
 
 .window-controls {
@@ -127,7 +132,7 @@ a {
 .file-meta {
   font-family: 'Fira Code', monospace;
   font-size: 0.9rem;
-  color: #888;
+  color: var(--text-3);
   margin: 0;
   flex-grow: 1;
 }
@@ -137,40 +142,27 @@ a {
   line-height: 1.6;
   padding: 1.25rem;
   font-size: 0.9rem;
-  background-color: #222222;
+  background-color: var(--surface-1);
   position: relative;
-}
-
-.file-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    rgba(130, 87, 229, 0.2),
-    rgba(214, 51, 132, 0.2)
-  );
 }
 
 .file-content p {
   margin: 0.75rem 0;
-  color: #d4d4d4;
+  color: var(--text-2);
 }
 
 .file-content a {
-  color: #8257e5;
+  color: var(--accent-1);
   text-decoration: none;
-  border-bottom: 1px dashed rgba(130, 87, 229, 0.4);
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent-1) 40%, transparent);
   transition: all 0.2s ease;
   padding-bottom: 1px;
 }
 
 .file-content a:hover {
-  color: #9b79f7;
+  color: var(--accent-2);
   border-bottom-style: solid;
-  border-bottom-color: rgba(130, 87, 229, 0.8);
+  border-bottom-color: color-mix(in srgb, var(--accent-2) 60%, transparent);
 }
 
 @media (max-width: 768px) {

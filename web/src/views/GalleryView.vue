@@ -33,11 +33,13 @@ onMounted(() => {
 .image-card {
   position: absolute;
   width: 250px;
-  background: rgba(255, 255, 255, 0.9);
+  background: color-mix(in srgb, var(--surface-1) 92%, transparent);
   padding: 1rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-1);
+  box-shadow: 0 2px 6px var(--shadow-1);
   transition: transform 0.3s ease, z-index 0.1s;
   z-index: 1;
+  border-radius: 8px;
 }
 
 .image-card:hover {
@@ -49,7 +51,8 @@ onMounted(() => {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border: 1px solid #333;
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
 }
 
 .image-info {
@@ -60,13 +63,13 @@ onMounted(() => {
   margin: 0;
   font-size: 1rem;
   text-transform: capitalize;
-  color: #111;
+  color: var(--text-1);
 }
 
 .image-info p {
   margin: 0.25rem 0 0;
   font-size: 0.8rem;
-  color: #444;
+  color: var(--text-2);
 }
 
 .pin {
@@ -79,7 +82,7 @@ onMounted(() => {
   background-color: #ff3333;
   border-radius: 50%;
   border: 1px solid #990000;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
 }
 
 .connections {
@@ -93,7 +96,7 @@ onMounted(() => {
 }
 
 .string-line {
-  stroke: #fff;
+  stroke: var(--text-3);
   stroke-width: 1;
   stroke-dasharray: 5, 5;
   opacity: 0.6;

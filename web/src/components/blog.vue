@@ -50,7 +50,7 @@ onMounted(async () => {
 <style>
 .vue-markdown-render {
   line-height: 1.6;
-  color: rgb(208, 208, 208);
+  color: var(--text-2);
 }
 
 .vue-markdown-render h1,
@@ -61,6 +61,7 @@ onMounted(async () => {
 .vue-markdown-render h6 {
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: var(--text-1);
 }
 
 .vue-markdown-render p {
@@ -68,13 +69,23 @@ onMounted(async () => {
 }
 
 .vue-markdown-render pre {
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 1rem;
   overflow-x: auto;
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border-1);
 }
 
 .vue-markdown-render code {
   font-family: "Source Code Pro", monospace;
+  color: var(--text-1);
+}
+
+.vue-markdown-render :not(pre) > code {
+  background: var(--surface-3);
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  padding: 0.1rem 0.35rem;
 }
 
 .vue-markdown-render img {

@@ -185,15 +185,15 @@ onMounted(async () => {
 }
 
 .intro {
-  color: white;
+  color: var(--text-1);
 }
 
 .body {
-  color: rgb(219, 219, 219);
+  color: var(--text-2);
 }
 
 .current-song {
-  color: rgb(219, 219, 219);
+  color: var(--text-2);
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   font-style: italic;
@@ -207,13 +207,13 @@ onMounted(async () => {
 }
 
 .tech-item {
-  background: rgba(130, 87, 229, 0.1);
-  color: #9b79f7;
+  background: var(--accent-soft);
+  color: var(--accent-2);
   padding: 0.2rem 1rem;
-  border-radius: 20px;
+  border-radius: 999px;
   font-size: 0.8rem;
   font-family: 'JetBrains Mono', monospace;
-  border: 1px solid rgba(130, 87, 229, 0.2);
+  border: 1px solid var(--border-1);
   transition: all 0.2s ease;
 }
 
@@ -225,10 +225,10 @@ onMounted(async () => {
 .search-input {
   width: 100%;
   padding: 0.5rem 1rem;
-  background: rgba(130, 87, 229, 0.1);
-  border: 1px solid rgba(130, 87, 229, 0.2);
-  border-radius: 20px;
-  color: white;
+  background: var(--input-bg);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  color: var(--text-1);
   font-family: 'JetBrains Mono', monospace;
   outline: none;
 }
@@ -238,9 +238,9 @@ onMounted(async () => {
   top: 100%;
   left: 0;
   right: 0;
-  background: rgba(18, 18, 18, 0.95);
-  border: 1px solid rgba(130, 87, 229, 0.2);
-  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
   margin-top: 0.5rem;
   max-height: 300px;
   overflow-y: scroll;
@@ -257,16 +257,16 @@ onMounted(async () => {
 }
 
 .search-result-item:hover {
-  background: rgba(130, 87, 229, 0.1);
+  background: var(--accent-soft);
 }
 
 .song-name {
-  color: white;
+  color: var(--text-1);
   font-size: 0.9rem;
 }
 
 .artist-name {
-  color: rgb(219, 219, 219);
+  color: var(--text-2);
   font-size: 0.8rem;
 }
 
@@ -277,13 +277,13 @@ onMounted(async () => {
   bottom: 24px;
   transform: translateX(-50%);
   padding: 0.6rem 1rem;
-  border-radius: 10px;
+  border-radius: 8px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
-  color: white;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  color: var(--text-1);
+  box-shadow: 0 8px 20px var(--shadow-1);
   z-index: 9999;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-1);
   backdrop-filter: blur(6px);
 }
 

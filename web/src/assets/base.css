@@ -23,32 +23,127 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  color-scheme: light;
+  --page-bg: #eef1f5;
+  --page-glow: none;
+  --surface-1: #f7f8fa;
+  --surface-2: #edf1f6;
+  --surface-3: #e3e7ee;
+  --border-1: #c8d0dc;
+  --text-1: #111827;
+  --text-2: #374151;
+  --text-3: #6b7280;
+  --accent-1: #b45309;
+  --accent-2: #92400e;
+  --accent-soft: rgba(180, 83, 9, 0.12);
+  --input-bg: #f7f8fa;
+  --shadow-1: rgba(15, 23, 42, 0.08);
+  --pattern-dot: transparent;
+  --icon-filter: invert(1);
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.35);
 
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-background: var(--page-bg);
+  --color-background-soft: var(--surface-2);
+  --color-background-mute: var(--surface-3);
+  --color-border: var(--border-1);
+  --color-border-hover: color-mix(in srgb, var(--border-1) 70%, transparent);
+  --color-heading: var(--text-1);
+  --color-text: var(--text-2);
 
   --section-gap: 160px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    color-scheme: dark;
+    --page-bg: #0b1220;
+    --page-glow: none;
+    --surface-1: #111827;
+    --surface-2: #0f172a;
+    --surface-3: #1e293b;
+    --border-1: rgba(148, 163, 184, 0.35);
+    --text-1: #e2e8f0;
+    --text-2: #cbd5f5;
+    --text-3: #94a3b8;
+    --accent-1: #f59e0b;
+    --accent-2: #fbbf24;
+    --accent-soft: rgba(245, 158, 11, 0.18);
+    --input-bg: #0f172a;
+    --shadow-1: rgba(15, 23, 42, 0.35);
+    --pattern-dot: transparent;
+    --icon-filter: invert(0);
+    --success: #22c55e;
+    --success-soft: rgba(34, 197, 94, 0.35);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-background: var(--page-bg);
+    --color-background-soft: var(--surface-2);
+    --color-background-mute: var(--surface-3);
+    --color-border: var(--border-1);
+    --color-border-hover: color-mix(in srgb, var(--border-1) 70%, transparent);
+    --color-heading: var(--text-1);
+    --color-text: var(--text-2);
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page-bg: #0b1220;
+  --page-glow: none;
+  --surface-1: #111827;
+  --surface-2: #0f172a;
+  --surface-3: #1e293b;
+  --border-1: rgba(148, 163, 184, 0.35);
+  --text-1: #e2e8f0;
+  --text-2: #cbd5f5;
+  --text-3: #94a3b8;
+  --accent-1: #f59e0b;
+  --accent-2: #fbbf24;
+  --accent-soft: rgba(245, 158, 11, 0.18);
+  --input-bg: #0f172a;
+  --shadow-1: rgba(15, 23, 42, 0.35);
+  --pattern-dot: transparent;
+  --icon-filter: invert(0);
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.35);
+
+  --color-background: var(--page-bg);
+  --color-background-soft: var(--surface-2);
+  --color-background-mute: var(--surface-3);
+  --color-border: var(--border-1);
+  --color-border-hover: color-mix(in srgb, var(--border-1) 70%, transparent);
+  --color-heading: var(--text-1);
+  --color-text: var(--text-2);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --page-bg: #eef1f5;
+  --page-glow: none;
+  --surface-1: #f7f8fa;
+  --surface-2: #edf1f6;
+  --surface-3: #e3e7ee;
+  --border-1: #c8d0dc;
+  --text-1: #111827;
+  --text-2: #374151;
+  --text-3: #6b7280;
+  --accent-1: #b45309;
+  --accent-2: #92400e;
+  --accent-soft: rgba(180, 83, 9, 0.12);
+  --input-bg: #f7f8fa;
+  --shadow-1: rgba(15, 23, 42, 0.08);
+  --pattern-dot: transparent;
+  --icon-filter: invert(1);
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.35);
+
+  --color-background: var(--page-bg);
+  --color-background-soft: var(--surface-2);
+  --color-background-mute: var(--surface-3);
+  --color-border: var(--border-1);
+  --color-border-hover: color-mix(in srgb, var(--border-1) 70%, transparent);
+  --color-heading: var(--text-1);
+  --color-text: var(--text-2);
 }
 
 *,
@@ -61,11 +156,13 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  color: var(--text-2);
+  background: var(--page-bg);
+  background-image: var(--page-glow);
   transition:
-    color 0.5s,
-    background-color 0.5s;
+    color 0.3s,
+    background-color 0.3s,
+    background-image 0.3s;
   line-height: 1.6;
   font-family:
     Inter,

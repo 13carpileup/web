@@ -96,17 +96,17 @@ const books: Book[] = [
   display: flex;
   width: 52px; /* Fixed collapsed width */
   min-height: 160px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(130, 87, 229, 0.2);
+  background: color-mix(in srgb, var(--surface-1) 85%, transparent);
+  border: 1px solid var(--border-1);
   border-bottom: none;
-  border-radius: 4px 4px 0 0;
+  border-radius: 6px 6px 0 0;
   overflow: hidden;
   transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s;
 }
 
 .book-item:hover {
   width: 340px; /* Room for long wrapped titles */
-  background: rgba(130, 87, 229, 0.08);
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface-1));
   border-color: var(--accent);
 }
 
@@ -117,7 +117,7 @@ const books: Book[] = [
   display: flex;
   justify-content: center;
   align-items: center; /* <-- REAL CENTERING */
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid var(--border-1);
 }
 
 .spine-text-container {
@@ -132,7 +132,7 @@ const books: Book[] = [
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
-  color: #fff;
+  color: var(--text-1);
   font-size: 0.85rem;
   font-family: 'JetBrains Mono', monospace;
   opacity: 0.8;
@@ -149,7 +149,7 @@ const books: Book[] = [
   bottom: 0;
   width: 3px;
   background: var(--accent);
-  box-shadow: 0 0 12px var(--accent);
+  box-shadow: none;
 }
 
 .expansion-content {
@@ -172,7 +172,7 @@ const books: Book[] = [
 }
 
 .full-title {
-  color: #fff;
+  color: var(--text-1);
   font-size: 1.05rem;
   font-weight: 700;
   line-height: 1.25;
@@ -197,26 +197,26 @@ const books: Book[] = [
 .track {
   flex: 1;
   height: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
+  background: color-mix(in srgb, var(--surface-2) 80%, transparent);
+  border-radius: 999px;
 }
 
 .bar {
   height: 100%;
   background: var(--accent);
-  border-radius: 3px;
+  border-radius: 999px;
 }
 
 .percent {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
-  color: #888;
+  color: var(--text-3);
 }
 
 .note {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
-  color: #555;
+  color: var(--text-3);
   margin: 0;
   white-space: normal;
   line-height: 1.4;
@@ -224,7 +224,7 @@ const books: Book[] = [
 
 .shelf-line {
   width: 100%;
-  height: 2px;
-  background: rgba(130, 87, 229, 0.4);
+  height: 1px;
+  background: var(--border-1);
 }
 </style>

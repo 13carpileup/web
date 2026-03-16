@@ -40,34 +40,34 @@ import blog from '../components/blog.vue'
 
 .project-title {
   font-size: 1.4rem;
-  color: #ffffff;
+  color: var(--text-1);
   margin: 0;
 }
 
 .project-description {
   font-size: 1rem;
-  color: #d4d4d4;
+  color: var(--text-2);
   margin: 0;
-}g
+}
 
 .project-link a {
   font-size: 1rem;
-  color: #8257e5;
+  color: var(--accent-1);
   text-decoration: none;
-  border-bottom: 1px dashed rgba(130, 87, 229, 0.4);
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent-1) 40%, transparent);
   transition: all 0.2s ease;
   padding-bottom: 1px;
 }
 
 .project-link a:hover {
-  color: #9b79f7;
+  color: var(--accent-2);
   border-bottom-style: solid;
-  border-bottom-color: rgba(130, 87, 229, 0.8);
+  border-bottom-color: color-mix(in srgb, var(--accent-2) 60%, transparent);
 }
 
 .project-tech {
   font-size: 0.9rem;
-  color: #a8a8a8;
+  color: var(--text-3);
   margin: 0;
   font-style: italic;
 }

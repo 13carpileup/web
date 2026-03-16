@@ -5,6 +5,7 @@ import { useRoute, RouterLink, RouterView } from 'vue-router';
 const route = useRoute();
 
 const typedLocation = ref('');
+const theme = ref<'dark' | 'light'>('dark');
 
 function typeText(target: string, time: number, prefix = '', speed = 65) {
   typedLocation.value = prefix; 
@@ -45,6 +46,14 @@ const newRouteName = ref<string | null>(null);
 onMounted(() => {
   newRouteName.value = route.name as string | null;
   updateLocation();
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') {
+    applyTheme(savedTheme);
+  } else {
+    const prefersLight = window.matchMedia?.('(prefers-color-scheme: light)')?.matches;
+    applyTheme(prefersLight ? 'light' : 'dark');
+  }
 });
 
 watch(() => route.name, (newRoute) => {
@@ -73,6 +82,16 @@ async function updateLocation() {
     lastRoute = newLocation;
   }
 }
+
+function applyTheme(value: 'dark' | 'light') {
+  theme.value = value;
+  document.documentElement.setAttribute('data-theme', value);
+  localStorage.setItem('theme', value);
+}
+
+function toggleTheme() {
+  applyTheme(theme.value === 'dark' ? 'light' : 'dark');
+}
 </script>
 
 <template>
@@ -86,6 +105,31 @@ async function updateLocation() {
         <RouterLink class="link" to="/"><span class="phone-hide">../</span>home</RouterLink>
         <RouterLink class="link" to="/projects"><span class="phone-hide">../</span>projects</RouterLink>
         <RouterLink class="link" to="/blog"><span class="phone-hide">../</span>blog</RouterLink>
+        <button
+          type="button"
+          class="theme-toggle-icon"
+          :class="{ 'is-dark': theme === 'dark' }"
+          @click="toggleTheme"
+          :aria-label="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+          :title="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+        >
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" />
+            <line x1="12" y1="2" x2="12" y2="5" />
+            <line x1="12" y1="19" x2="12" y2="22" />
+            <line x1="2" y1="12" x2="5" y2="12" />
+            <line x1="19" y1="12" x2="22" y2="12" />
+            <line x1="4.2" y1="4.2" x2="6.7" y2="6.7" />
+            <line x1="17.3" y1="17.3" x2="19.8" y2="19.8" />
+            <line x1="4.2" y1="19.8" x2="6.7" y2="17.3" />
+            <line x1="17.3" y1="6.7" x2="19.8" y2="4.2" />
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M21 12.5c-1.4.6-3 .9-4.7.7-4.1-.4-7.3-3.8-7.3-7.9 0-1.1.2-2.1.6-3.1-3.6 1.2-6.2 4.6-6.2 8.6 0 5 4.1 9.1 9.1 9.1 3.9 0 7.2-2.4 8.5-5.9z"
+            />
+          </svg>
+        </button>
       </nav>
     </div>
   </header>
@@ -105,18 +149,15 @@ async function updateLocation() {
 }
 
 .joke {
-  color: rgb(89, 103, 85);
+  color: var(--text-3);
 }
 
 .content {
   align-items: center;
   width: 100%;
-  padding: 2rem;
-  margin: auto;
-  background-color: #1a1a1a;
-  background-image: radial-gradient(#434343 1px, transparent 2px);
-  background-size: 32px 32px;
-  border-radius: 10px;
+  padding: 2rem 0;
+  margin: 0 auto;
+  background-color: transparent;
 }
 
 .location-container {
@@ -125,7 +166,7 @@ async function updateLocation() {
 }
 
 .location {
-  color: #4ade80; /* Bright terminal green */ /*thank u gpt for the colour selection*/
+  color: var(--accent-1);
   font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
   font-weight: 300;
@@ -140,13 +181,13 @@ async function updateLocation() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1a1a1a;
-  border-radius: 4px;
+  background: transparent;
 }
 
 header {
   width: 100%;
   padding: 1rem 0;
+  border-bottom: 1px solid var(--border-1);
 }
 
 nav {
@@ -156,18 +197,70 @@ nav {
 }
 
 nav a {
-  color: #888;
+  color: var(--text-3);
   text-decoration: none;
   padding: 0.5rem 1rem;
+  border-bottom: 1px solid transparent;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #fff;
+  color: var(--text-1);
+  border-bottom-color: var(--border-1);
 }
 
 nav a.router-link-exact-active {
-  color: #fff;
+  color: var(--text-1);
+  border-bottom-color: var(--accent-1);
+}
+
+.theme-toggle-icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  border: 1px solid var(--border-1);
+  background: var(--surface-1);
+  color: var(--text-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle-icon:hover {
+  color: var(--text-1);
+}
+
+.theme-toggle-icon .icon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle-icon .icon-moon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.theme-toggle-icon.is-dark .icon-sun {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-toggle-icon:not(.is-dark) .icon-moon {
+  opacity: 1;
+  transform: scale(1);
 }
 
 @media (max-width: 768px) {
@@ -181,6 +274,7 @@ nav a.router-link-exact-active {
   nav {
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .location {

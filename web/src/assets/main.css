@@ -5,10 +5,20 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  min-height: 100vh;
+  border-left: 1px solid var(--border-1);
+  border-right: 1px solid var(--border-1);
 }
 
 @media (hover: hover) {
   a {
     transition: all 0.3s ease; /* Smooth transition for the effect */
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    border-left: none;
+    border-right: none;
   }
 }

@@ -106,7 +106,11 @@ import file from '../components/file.vue'
   content: '';
   position: absolute;
   width: 2px;
-  background: linear-gradient(to bottom, #4ade80 0%, #434343 30%); /* Green fade at top */
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--success) 80%, transparent) 0%,
+    var(--border-1) 30%
+  );
   top: 0;
   bottom: 0;
   left: 50%;
@@ -130,8 +134,8 @@ import file from '../components/file.vue'
   width: 12px;
   height: 12px;
   right: -6px;
-  background-color: #1a1a1a;
-  border: 2px solid #8257e5;
+  background-color: var(--surface-1);
+  border: 1px solid var(--accent-1);
   top: 25px;
   border-radius: 50%;
   z-index: 1;
@@ -139,24 +143,26 @@ import file from '../components/file.vue'
 }
 
 .timeline-item:nth-child(even)::after { left: -6px; }
-.timeline-item:hover::after { background-color: #8257e5; box-shadow: 0 0 10px rgba(130, 87, 229, 0.5); }
+.timeline-item:hover::after {
+  background-color: var(--accent-1);
+  box-shadow: none;
+}
 
 /* --- Active Item Styling (Rocket) --- */
 .timeline-item.active::after {
-  background-color: #1a1a1a;
-  border-color: #4ade80; /* Terminal Green */
-  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
-  animation: pulse-green 2s infinite;
+  background-color: var(--surface-1);
+  border-color: var(--success);
+  box-shadow: none;
 }
 
 .image-wrapper {
   width: 100%;
   height: 120px;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
   margin-bottom: 0.5rem;
-  border: 1px solid #333;
+  border: 1px solid var(--border-1);
 }
 
 .project-image {
@@ -179,43 +185,36 @@ import file from '../components/file.vue'
 
 .project-title {
   font-size: 1.4rem;
-  color: #ffffff;
+  color: var(--text-1);
   margin: 0;
 }
 
 .project-description {
   font-size: 1rem;
-  color: #d4d4d4;
+  color: var(--text-2);
   margin: 0;
 }
 
 .project-link a {
   font-size: 1rem;
-  color: #8257e5;
+  color: var(--accent-1);
   text-decoration: none;
-  border-bottom: 1px dashed rgba(130, 87, 229, 0.4);
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent-1) 40%, transparent);
   transition: all 0.2s ease;
   padding-bottom: 1px;
 }
 
 .project-link a:hover {
-  color: #9b79f7;
+  color: var(--accent-2);
   border-bottom-style: solid;
-  border-bottom-color: rgba(130, 87, 229, 0.8);
+  border-bottom-color: color-mix(in srgb, var(--accent-2) 60%, transparent);
 }
 
 .project-tech {
   font-size: 0.9rem;
-  color: #a8a8a8;
+  color: var(--text-3);
   margin: 0;
   font-style: italic;
-}
-
-/* Animations */
-@keyframes pulse-green {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
 }
 
 /* Mobile Responsiveness */
