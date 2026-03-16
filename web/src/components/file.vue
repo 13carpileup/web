@@ -30,7 +30,7 @@ defineProps<{
     <div class="file-content">
       <slot></slot>
     </div>
-    <div v-if="back" class="file-header">
+    <div v-if="back" class="file-header file-footer">
       <p class="file-meta">
         <RouterLink :to="back" class="github-anchor">
         <span class="github-link" id="bottom-link">
@@ -88,24 +88,28 @@ a {
 }
 
 .file-container {
+  --file-radius: 8px;
   background: var(--surface-1);
   border: 1px solid var(--border-1);
-  border-radius: 8px;
+  border-radius: var(--file-radius);
   overflow: hidden;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
 }
 
 .file-header {
-  background: var(--surface-3);
+  background: var(--surface-1);
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border-1);
   display: flex;
   align-items: center;
   gap: 1rem;
+  border-radius: 0;
 }
 
-.file-header {
+.file-footer {
+  border-top: 1px solid var(--border-1);
+  border-bottom: none;
   border-radius: 0;
 }
 

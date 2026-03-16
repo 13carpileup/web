@@ -181,7 +181,6 @@ onMounted(async () => {
 
 .content {
   margin: auto;
-  overflow: visible;
 }
 
 .intro {

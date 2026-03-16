@@ -24,19 +24,19 @@
 /* semantic color variables for this project */
 :root {
   color-scheme: light;
-  --page-bg: #e7ebf1;
+  --page-bg: #e2e7ee;
   --page-glow: none;
-  --surface-1: #f0f2f5;
-  --surface-2: #e6ebf2;
-  --surface-3: #dde3ec;
-  --border-1: #c2cbd8;
+  --surface-1: #eef1f5;
+  --surface-2: #e4e9f1;
+  --surface-3: #dbe1ea;
+  --border-1: #bfc9d8;
   --text-1: #111827;
   --text-2: #374151;
   --text-3: #6b7280;
-  --accent-1: #b45309;
-  --accent-2: #92400e;
-  --accent-soft: rgba(180, 83, 9, 0.12);
-  --input-bg: #f0f2f5;
+  --accent-1: #6f5a8e;
+  --accent-2: #5b486f;
+  --accent-soft: rgba(111, 90, 142, 0.12);
+  --input-bg: #eef1f5;
   --shadow-1: rgba(15, 23, 42, 0.08);
   --pattern-dot: transparent;
   --icon-filter: invert(1);
@@ -66,9 +66,9 @@
     --text-1: #e2e8f0;
     --text-2: #cbd5f5;
     --text-3: #94a3b8;
-    --accent-1: #f59e0b;
-    --accent-2: #fbbf24;
-    --accent-soft: rgba(245, 158, 11, 0.18);
+    --accent-1: #bca6e3;
+    --accent-2: #d8c9f0;
+    --accent-soft: rgba(188, 166, 227, 0.18);
     --input-bg: #0f172a;
     --shadow-1: rgba(15, 23, 42, 0.35);
     --pattern-dot: transparent;
@@ -97,9 +97,9 @@
   --text-1: #e2e8f0;
   --text-2: #cbd5f5;
   --text-3: #94a3b8;
-  --accent-1: #f59e0b;
-  --accent-2: #fbbf24;
-  --accent-soft: rgba(245, 158, 11, 0.18);
+  --accent-1: #bca6e3;
+  --accent-2: #d8c9f0;
+  --accent-soft: rgba(188, 166, 227, 0.18);
   --input-bg: #0f172a;
   --shadow-1: rgba(15, 23, 42, 0.35);
   --pattern-dot: transparent;
@@ -118,19 +118,19 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --page-bg: #e7ebf1;
+  --page-bg: #e2e7ee;
   --page-glow: none;
-  --surface-1: #f0f2f5;
-  --surface-2: #e6ebf2;
-  --surface-3: #dde3ec;
-  --border-1: #c2cbd8;
+  --surface-1: #eef1f5;
+  --surface-2: #e4e9f1;
+  --surface-3: #dbe1ea;
+  --border-1: #bfc9d8;
   --text-1: #111827;
   --text-2: #374151;
   --text-3: #6b7280;
-  --accent-1: #b45309;
-  --accent-2: #92400e;
-  --accent-soft: rgba(180, 83, 9, 0.12);
-  --input-bg: #f0f2f5;
+  --accent-1: #6f5a8e;
+  --accent-2: #5b486f;
+  --accent-soft: rgba(111, 90, 142, 0.12);
+  --input-bg: #eef1f5;
   --shadow-1: rgba(15, 23, 42, 0.08);
   --pattern-dot: transparent;
   --icon-filter: invert(1);
