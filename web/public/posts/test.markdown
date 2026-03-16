@@ -1,4 +1,4 @@
-Feeling defeated by my failure to solve any of the 'hard' crypto problems on display at HKCERT CTF, I turned my attention to Cook Book: it had the fewest lines of code. Therefore, it should be the easiest. Look at how few lines of code there are: 
+Feeling defeated by my failure to solve any of the 'hard' crypto problems on display at HKCERT CTF, I turned my attention to Cook Book: it had the fewest lines of code, and should therefore be the easiest. Look at how few lines of code there are: 
 
 ```python
 from Crypto.Cipher import AES
