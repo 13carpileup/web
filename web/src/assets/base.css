@@ -24,19 +24,19 @@
 /* semantic color variables for this project */
 :root {
   color-scheme: light;
-  --page-bg: #eef1f5;
+  --page-bg: #e7ebf1;
   --page-glow: none;
-  --surface-1: #f7f8fa;
-  --surface-2: #edf1f6;
-  --surface-3: #e3e7ee;
-  --border-1: #c8d0dc;
+  --surface-1: #f0f2f5;
+  --surface-2: #e6ebf2;
+  --surface-3: #dde3ec;
+  --border-1: #c2cbd8;
   --text-1: #111827;
   --text-2: #374151;
   --text-3: #6b7280;
   --accent-1: #b45309;
   --accent-2: #92400e;
   --accent-soft: rgba(180, 83, 9, 0.12);
-  --input-bg: #f7f8fa;
+  --input-bg: #f0f2f5;
   --shadow-1: rgba(15, 23, 42, 0.08);
   --pattern-dot: transparent;
   --icon-filter: invert(1);
@@ -118,19 +118,19 @@
 
 :root[data-theme='light'] {
   color-scheme: light;
-  --page-bg: #eef1f5;
+  --page-bg: #e7ebf1;
   --page-glow: none;
-  --surface-1: #f7f8fa;
-  --surface-2: #edf1f6;
-  --surface-3: #e3e7ee;
-  --border-1: #c8d0dc;
+  --surface-1: #f0f2f5;
+  --surface-2: #e6ebf2;
+  --surface-3: #dde3ec;
+  --border-1: #c2cbd8;
   --text-1: #111827;
   --text-2: #374151;
   --text-3: #6b7280;
   --accent-1: #b45309;
   --accent-2: #92400e;
   --accent-soft: rgba(180, 83, 9, 0.12);
-  --input-bg: #f7f8fa;
+  --input-bg: #f0f2f5;
   --shadow-1: rgba(15, 23, 42, 0.08);
   --pattern-dot: transparent;
   --icon-filter: invert(1);

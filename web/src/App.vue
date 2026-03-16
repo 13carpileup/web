@@ -134,7 +134,11 @@ function toggleTheme() {
     </div>
   </header>
   <div class="content">
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <Transition name="page-fade" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </div>
 
   <div class="preloading">
@@ -288,5 +292,16 @@ nav a.router-link-exact-active {
   .phone-hide {
     display: none;
   }
+}
+
+:global(.page-fade-enter-active),
+:global(.page-fade-leave-active) {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+:global(.page-fade-enter-from),
+:global(.page-fade-leave-to) {
+  opacity: 0;
+  transform: translateY(6px);
 }
 </style>

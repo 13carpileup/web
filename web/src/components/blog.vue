@@ -49,8 +49,9 @@ onMounted(async () => {
 
 <style>
 .vue-markdown-render {
-  line-height: 1.6;
+  line-height: 1.8;
   color: var(--text-2);
+  font-size: 1rem;
 }
 
 .vue-markdown-render h1,
@@ -62,10 +63,33 @@ onMounted(async () => {
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: var(--text-1);
+  letter-spacing: 0.01em;
+}
+
+.vue-markdown-render h2 {
+  margin-top: 2rem;
+}
+
+.vue-markdown-render h3 {
+  margin-top: 1.5rem;
 }
 
 .vue-markdown-render p {
   margin-bottom: 1rem;
+}
+
+.vue-markdown-render ul,
+.vue-markdown-render ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.vue-markdown-render blockquote {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--accent-1);
+  background: var(--surface-2);
+  color: var(--text-2);
 }
 
 .vue-markdown-render pre {
