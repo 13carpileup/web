@@ -118,8 +118,12 @@ onMounted(async () => {
     </div>
   </file>
 
-  <file fileName="music.md" class="content" id="socials">
-    <p class="body">Reach out via email for anything formal (climiealex@gmail.com), or discord for anything at all (13carpileup).</p>
+  <file fileName="findme.md" class="content" id="socials">
+    <p class="body">
+      Reach out via email for anything formal (climiealex@gmail.com), or discord for anything at all (13carpileup).
+      If you want to stalk me a little more passively, view my photo gallery
+      <RouterLink to="/gallery">here</RouterLink>.
+    </p>
   </file>
 
   <file fileName="books.md" class="content" id="books">

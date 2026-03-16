@@ -1,117 +1,111 @@
 <script setup lang="ts">
 import file from '../components/file.vue'
-import { onMounted, ref } from 'vue'
 
-const images = [
-    {url: 'gallery/meowzers.jpg', title: "mr meow", location:"hong kong", date: "2025/03/26"},
-]
+type Photo = {
+  id: number;
+  src: string;
+  date: string;
+  desc: string;
+};
 
+const sources = [
+  { src: '/gallery/20260307.jpg', date: '2026/03/07', desc: 'geese on the roof' },
+  { src: '/gallery/20260224.jpg', date: '2026/02/24', desc: 'stuck in a lab' },
+  { src: '/gallery/20260217.jpg', date: '2026/02/17', desc: 'CONCRETE JUNGLE WHERE DREAMS ARE MADE OF' },
+  { src: '/gallery/20260217_1.jpg', date: '2026/02/17', desc: 'chill guys' },
+  { src: '/gallery/20260119.jpg', date: '2026/01/19', desc: 'foggy day' },
+  { src: '/gallery/20251231.jpg', date: '2025/12/31', desc: 'salt spring' },
+  { src: '/gallery/20251231_1.jpg', date: '2025/12/31', desc: 'beautiful little guy' },
+  { src: '/gallery/20251223.jpg', date: '2025/12/23', desc: 'passionate montreal streets' },
+  { src: '/gallery/20251031.jpg', date: '2025/10/31', desc: 'fall guy spotted' },
+  { src: '/gallery/20251018.jpg', date: '2025/10/18', desc: 'grindin on grouse' },
+  { src: '/gallery/20250628.jpg', date: '2025/06/28', desc: 'swiss cat' },
+  { src: '/gallery/20250617.jpg', date: '2025/06/17', desc: 'italian cat' },
+  { src: '/gallery/meowzers.jpg', date: '2025/03/26', desc: 'hong kong cat' },
+];
 
-
-onMounted(() => {
- 
-})
+const photos: Photo[] = Array.from({ length: sources.length }, (_, i) => {
+  const base = sources[i];
+  return {
+    id: sources.length - i,
+    src: base.src,
+    date: base.date,
+    desc: base.desc,
+  };
+});
 </script>
 
 <template>
-  <main class="gallery-container" ref="containerRef">
-
- 
-    
-
+  <main class="gallery-page">
+    <div class="gallery-grid">
+      <file
+        v-for="photo in photos"
+        :key="photo.id"
+        class="photo-file"
+        :fileName="`photo_${String(photo.id).padStart(2, '0')}.jpg`"
+        :date="photo.date"
+      >
+        <div class="photo-body">
+          <img :src="photo.src" :alt="`Photo ${photo.id}`" loading="lazy" />
+          <p class="photo-desc">{{ photo.desc }}</p>
+        </div>
+      </file>
+    </div>
   </main>
 </template>
 
 <style scoped>
-.gallery-container {
-  position: relative;
+.gallery-page {
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
 }
 
-.image-card {
-  position: absolute;
-  width: 250px;
-  background: color-mix(in srgb, var(--surface-1) 92%, transparent);
-  padding: 1rem;
-  border: 1px solid var(--border-1);
-  box-shadow: 0 2px 6px var(--shadow-1);
-  transition: transform 0.3s ease, z-index 0.1s;
-  z-index: 1;
-  border-radius: 8px;
+.gallery-grid {
+  columns: 3 260px;
+  column-gap: 16px;
 }
 
-.image-card:hover {
-  transform: scale(1.05) rotate(0deg) !important;
-  z-index: 10;
+.photo-file :deep(.file-content) {
+  padding: 0.75rem;
 }
 
-.img {
+.photo-file {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 16px;
+  break-inside: avoid;
+}
+
+.photo-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.photo-body img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  display: block;
   border: 1px solid var(--border-1);
   border-radius: 6px;
 }
 
-.image-info {
-  margin-top: 0.5rem;
-}
-
-.image-info h3 {
+.photo-desc {
   margin: 0;
-  font-size: 1rem;
-  text-transform: capitalize;
-  color: var(--text-1);
-}
-
-.image-info p {
-  margin: 0.25rem 0 0;
   font-size: 0.8rem;
-  color: var(--text-2);
+  color: var(--text-3);
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.pin {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  background-color: #ff3333;
-  border-radius: 50%;
-  border: 1px solid #990000;
-  box-shadow: none;
-}
-
-.connections {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.string-line {
-  stroke: var(--text-3);
-  stroke-width: 1;
-  stroke-dasharray: 5, 5;
-  opacity: 0.6;
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .image-card {
-    width: 200px;
+  .gallery-grid {
+    columns: 2 200px;
+    column-gap: 12px;
   }
 }
 
-@media (max-width: 480px) {
-  .image-card {
-    width: 150px;
+@media (max-width: 520px) {
+  .gallery-grid {
+    columns: 1 100%;
   }
 }
 </style>
