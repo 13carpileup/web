@@ -11,11 +11,11 @@ type Book = {
 
 const books: Book[] = [
   {
-    title: 'Foundation and Empire',
-    shortTitle: 'Foundation',
-    author: 'Isaac Asimov',
-    progress: 65,
-    note: 'the mule...',
+    title: 'Axiomatic',
+    shortTitle: 'Axiomatic',
+    author: 'Greg Egan',
+    progress: 70,
+    note: 'LOVE GREG EGAN',
     color: '#9b79f7',
     height: 150,
   },
@@ -23,19 +23,11 @@ const books: Book[] = [
     title: 'Introduction to the Theory of Computation',
     shortTitle: 'ToC',
     author: 'Michael Sipser',
-    progress: 10,
-    note: 'DFAs → NFAs',
+    progress: 20,
+    note: 'lowkey overdue on this loan',
     color: '#22c55e',
     height: 185,
-  },
-    {
-    title: 'Gödel, Escher, Bach',
-    shortTitle: 'GEB',
-    author: 'Douglas Hofstadter',
-    progress: 0,
-    color: '#6366f1',
-    height: 175,
-  },
+  }
 ];
 
 </script>
