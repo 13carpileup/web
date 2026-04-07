@@ -9,6 +9,8 @@ type Photo = {
 };
 
 const sources = [
+  { src: '/gallery/20260407.jpg', date: '2026/04/07', desc: "i don't think that you're allowed to park there"},
+  { src: '/gallery/20260326.jpg', date: '2026/03/26', desc: 'downtown vancouver' },
   { src: '/gallery/20260307.jpg', date: '2026/03/07', desc: 'geese on the roof' },
   { src: '/gallery/20260224.jpg', date: '2026/02/24', desc: 'stuck in a lab' },
   { src: '/gallery/20260217.jpg', date: '2026/02/17', desc: 'CONCRETE JUNGLE WHERE DREAMS ARE MADE OF' },
