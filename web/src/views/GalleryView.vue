@@ -9,6 +9,9 @@ type Photo = {
 };
 
 const sources = [
+  { src: '/gallery/20260614.jpg', date: '2026/06/14', desc: "from one of ubc's seven beaches"},
+  { src: '/gallery/20260513-1.jpg', date: '2026/05/13', desc: "canadian racoons do not respect personal boundaries"},
+  { src: '/gallery/20260513.jpg', date: '2026/05/13', desc: "they beg for my stale bread everytime i make a sandwich"},
   { src: '/gallery/20260407.jpg', date: '2026/04/07', desc: "i don't think that you're allowed to park there"},
   { src: '/gallery/20260326.jpg', date: '2026/03/26', desc: 'downtown vancouver' },
   { src: '/gallery/20260307.jpg', date: '2026/03/07', desc: 'geese on the roof' },

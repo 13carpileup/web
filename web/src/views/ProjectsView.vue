@@ -5,6 +5,18 @@ import file from '../components/file.vue'
 <template>
   <main class="projects-container">
     <div class="timeline">
+
+      <div class="timeline-item active">
+        <div class="timeline-content">
+          <file fileName="delusional.go" date="2026/6 - now" gh="https://github.com/13carpileup/pathtoicpc">
+            <div class="project-details">
+              <h2 class="project-title">pathtoicpc</h2>
+              <p class="project-description">current job market is so cooked that my best chance of getting an internship is doing decently at icpc, so i'm making a platform to help practice (integrated with codeforces)!</p>
+              <p class="project-tech">tech: golang (honestly GOated), react (frontend is definitely all ai generated though lol)</p>
+            </div>
+          </file>
+        </div>
+      </div>
       
       <div class="timeline-item active">
         <div class="timeline-content">
