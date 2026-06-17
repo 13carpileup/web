@@ -121,8 +121,9 @@ onMounted(async () => {
   <file fileName="findme.md" class="content" id="socials">
     <p class="body">
       Reach out via email for anything formal (climiealex@gmail.com), or discord for anything at all (13carpileup).
-      If you want to stalk me a little more passively, view my photo gallery
-      <RouterLink to="/gallery">here</RouterLink>.
+      If you want to stalk me a little more passively, view my photo gallery 
+      <RouterLink to="/gallery">here</RouterLink>, or add me as a friend on <a target="_blank" href="https://www.goodreads.com/user/show/92509255-alex-climie">goodreads</a>
+
     </p>
   </file>
 
